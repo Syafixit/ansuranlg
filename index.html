@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aircond LG Ansuran – Mohon Sekarang</title>
+  <meta name="description" content="Aircond LG – Sejuk Cepat, Jimat Tenaga. Ansuran serendah RM80/bulan. Pemasangan asas percuma, waranti compressor 10 tahun. Mohon WhatsApp 011-2059 2207."/>
+  <style>
+    :root{
+      --bg:#f7fafc; --card:#ffffff; --ink:#0f172a; --muted:#475569; --brand:#ef4444; --brand-2:#3b82f6; --ok:#16a34a; --ring: rgba(59,130,246,.35);
+      --radius:16px; --shadow:0 10px 25px rgba(2,6,23,.08);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial}
+    a{color:inherit}
+    .container{max-width:1100px;margin:auto;padding:24px}
+    .btn{display:inline-flex;align-items:center;gap:.6rem;padding:14px 20px;border-radius:999px;border:0;cursor:pointer;font-weight:700;text-decoration:none;background:linear-gradient(90deg,var(--brand),var(--brand-2));color:#fff;box-shadow:0 10px 20px rgba(239,68,68,.2);transition:transform .15s ease, filter .15s ease}
+    .btn:hover{transform:translateY(-1px);filter:saturate(1.05)}
+    .btn.ghost{background:#111827;color:#fff}
+    .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:#eef2ff;color:#3730a3;font-weight:600;font-size:.85rem}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:#ecfeff;color:#0369a1;font-weight:600;font-size:.85rem}
+    .hero{padding:42px 0 28px}
+    .hero-wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center}
+    .hero h1{font-size:clamp(1.6rem,2.8vw,2.4rem);line-height:1.2;margin:.2rem 0 .6rem}
+    .hero p{color:var(--muted);margin:0 0 1rem}
+    .hero .cards{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 18px}
+    .hero-visual{background:linear-gradient(135deg,#fff,#e0f2fe);border-radius:var(--radius);box-shadow:var(--shadow);aspect-ratio:4/3;position:relative;overflow:hidden}
+    .hero-visual:before{content:"";position:absolute;inset:0;background:
+      radial-gradient(120px 120px at 20% 30%, rgba(59,130,246,.18), transparent 60%),
+      radial-gradient(120px 120px at 80% 70%, rgba(239,68,68,.18), transparent 60%)}
+    .sticky-cta{position:fixed;z-index:50;inset:auto 12px 12px 12px;display:none}
+    .sticky-cta .btn{width:100%;justify-content:center}
+
+    /* Value props */
+    .value{padding:10px 0 8px}
+    .value-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .value-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px}
+    .value-card h4{margin:6px 0 4px;font-size:1rem}
+    .value-card p{margin:0;color:var(--muted);font-size:.92rem}
+
+    /* Models (Accordion + Slider) */
+    .models{padding:26px 0}
+    .models h2{margin:0 0 10px}
+    .acc{display:grid;gap:12px}
+    .acc-item{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+    .acc-head{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;cursor:pointer}
+    .acc-head:hover{background:#fafafa}
+    .label{display:flex;gap:12px;align-items:center}
+    .chip{font-weight:800;font-size:.95rem;padding:4px 10px;border-radius:999px;background:#eef2ff;color:#3730a3}
+    .price{font-weight:800;color:var(--ok)}
+    .chev{transition:transform .2s ease}
+    .acc-item.open .chev{transform:rotate(180deg)}
+    .acc-body{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;padding:16px;border-top:1px solid #eee}
+    .spec{display:grid;gap:10px}
+    .spec ul{margin:0;padding-left:18px;color:var(--muted)}
+
+    /* Slider */
+    .slider{position:relative;border-radius:12px;overflow:hidden;background:#00010a}
+    .slides{display:flex;transition:transform .35s ease}
+    .slide{min-width:100%;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0ea5e9,#ef4444);color:#fff;font-weight:800;letter-spacing:.06em}
+    .slide img, .slide video{width:100%;height:100%;object-fit:cover}
+    .dots{position:absolute;left:0;right:0;bottom:10px;display:flex;gap:6px;justify-content:center}
+    .dot{width:9px;height:9px;border-radius:999px;background:rgba(255,255,255,.55);border:0}
+    .dot.active{background:#fff}
+    .ctrl{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.9);border:0;border-radius:999px;width:38px;height:38px;display:grid;place-items:center;cursor:pointer}
+    .ctrl.left{left:8px} .ctrl.right{right:8px}
+
+    .mini-faq{background:#f8fafc;border-radius:12px;padding:12px}
+
+    /* HP picker */
+    .hp-picker{display:none;gap:8px;flex-wrap:wrap;margin:6px 0 10px}
+    .hp-btn{padding:8px 12px;border-radius:999px;border:1px solid #e5e7eb;background:#fff;cursor:pointer}
+    .hp-btn[aria-pressed="true"]{outline:3px solid var(--ring);border-color:#93c5fd}
+    .cta-wrap{display:none;gap:10px;flex-wrap:wrap}
+
+    /* Process */
+    .process{padding:10px 0 0}
+    .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+    .step{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px}
+    .step h4{margin:0 0 6px}
+
+    /* Testimonials */
+    .testi{padding:26px 0}
+    .testi h2{margin:0 0 10px}
+    .testi-slider{position:relative}
+    .testi-row{display:flex;gap:12px;overflow:auto;scroll-snap-type:x mandatory;padding-bottom:6px}
+    .t-card{min-width:290px;max-width:360px;flex:0 0 auto;background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);scroll-snap-align:start}
+    .t-media{position:relative;aspect-ratio:16/9;background:#0ea5e9;border-top-left-radius:var(--radius);border-top-right-radius:var(--radius);overflow:hidden}
+    .t-media img, .t-media video{width:100%;height:100%;object-fit:cover}
+    .t-body{padding:12px}
+    blockquote{margin:0 0 6px;padding-left:12px;border-left:3px solid #e5e7eb;color:#334155;font-style:italic}
+    .t-meta{font-size:.9rem;color:#64748b}
+
+    /* FAQ */
+    .faq{padding:10px 0 26px}
+    details{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:12px;margin-bottom:10px}
+    summary{cursor:pointer;font-weight:700}
+
+    /* Footer & CTA Penutup */
+    .cta-end{background:linear-gradient(90deg,#fee2e2,#e0f2fe);border-radius:var(--radius);padding:18px;display:grid;gap:8px;align-items:center;box-shadow:var(--shadow)}
+    footer{padding:26px 0;color:#64748b;font-size:.95rem}
+
+    /* Responsive */
+    @media (max-width: 900px){
+      .hero-wrap{grid-template-columns:1fr}
+      .value-grid{grid-template-columns:repeat(2,1fr)}
+      .acc-body{grid-template-columns:1fr}
+      .steps{grid-template-columns:repeat(2,1fr)}
+      .sticky-cta{display:block}
+    }
+  </style>
+</head>
+<body>
+  <header class="container hero">
+    <div class="hero-wrap">
+      <div>
+        <span class="badge">5★ Energy • Pemasangan Asas Percuma</span>
+        <h1>Aircond LG – Sejuk Cepat, Jimat Tenaga. <span style="white-space:nowrap">Ansuran dari RM80/bulan.</span></h1>
+        <p>Pasang terus, bayar kemudian. Waranti compressor 10 tahun, servis berkala. Kelulusan pantas & mudah.</p>
+        <div class="cards">
+          <span class="pill">0% faedah</span>
+          <span class="pill">Tiada deposit tinggi</span>
+          <span class="pill">Kelulusan ≤ 24 jam</span>
+        </div>
+        <a class="btn" href="https://wa.me/601120592207" target="_blank" rel="noopener">Mohon WhatsApp 011‑2059 2207</a>
+      </div>
+      <div class="hero-visual" aria-hidden="true"></div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Value Props -->
+    <section class="value" aria-labelledby="kenapa">
+      <h2 id="kenapa">Kenapa Pilih LG</h2>
+      <div class="value-grid">
+        <div class="value-card"><h4>DUAL Inverter</h4><p>Sejuk cepat, bil elektrik lebih rendah.</p></div>
+        <div class="value-card"><h4>Plasmaster™ Ionizer++</h4><p>Udara lebih bersih & segar untuk keluarga.</p></div>
+        <div class="value-card"><h4>ThinQ (Wi‑Fi)</h4><p>Kawal dari telefon – hidup/henti & suhu.</p></div>
+        <div class="value-card"><h4>Waranti 10 Tahun</h4><p>Perlindungan compressor jangka panjang.</p></div>
+      </div>
+    </section>
+
+    <!-- Models: Accordion + Slider (2 pilihan: Putih & Hitam) -->
+    <section class="models" aria-labelledby="model">
+      <h2 id="model">Pilihan Model & Harga (Interactive)</h2>
+      <div class="acc" id="modelsAcc"></div>
+    </section>
+
+    <!-- Process -->
+    <section class="process" aria-labelledby="proses">
+      <h2 id="proses">Cara Mohon (4 Langkah)</h2>
+      <div class="steps">
+        <div class="step"><h4>1. Pilih Model</h4><p>Pilih HP & ciri mengikut saiz bilik.</p></div>
+        <div class="step"><h4>2. Hantar Dokumen</h4><p>IC & slip gaji – semudah WhatsApp.</p></div>
+        <div class="step"><h4>3. Lulus Pantas</h4><p>Semakan ≤ 24 jam, tiada deposit tinggi.</p></div>
+        <div class="step"><h4>4. Pasang & Guna</h4><p>Temujanji pemasangan, terus nikmati sejuk.</p></div>
+      </div>
+    </section>
+
+    <!-- Testimonials: Media + Quote -->
+    <section class="testi" aria-labelledby="testi">
+      <h2 id="testi">Testimoni Pelanggan</h2>
+      <div class="testi-slider">
+        <div class="testi-row" id="testiRow"></div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" aria-labelledby="faq">
+      <h2 id="faq">Soalan Lazim</h2>
+      <details>
+        <summary>Dokumen apa diperlukan?</summary>
+        <p>Salinan IC depan/belakang & slip gaji 1–3 bulan / penyata bank.</p>
+      </details>
+      <details>
+        <summary>Berapa lama proses kelulusan?</summary>
+        <p>Kebiasaannya dalam 24 jam hari bekerja.</p>
+      </details>
+      <details>
+        <summary>Ada kos pemasangan tambahan?</summary>
+        <p>Pemasangan asas percuma; bahan tambahan (piping > standard, bracket berat, wiring baharu) mungkin ada caj.</p>
+      </details>
+      <details>
+        <summary>Bil elektrik naik tak?</summary>
+        <p>Model DUAL Inverter + 5★ Energy membantu lebih jimat berbanding biasa, bergantung pola penggunaan.</p>
+      </details>
+    </section>
+
+    <!-- CTA End -->
+    <section class="cta-end">
+      <div>
+        <h3 style="margin:0">Sedia Pasang Minggu Ini – Stok Terhad</h3>
+        <p style="margin:.2rem 0;color:var(--muted)">Mohon sekarang untuk kunci slot pemasangan anda.</p>
+      </div>
+      <div>
+        <a class="btn" href="https://wa.me/601120592207" target="_blank" rel="noopener">Mohon WhatsApp 011‑2059 2207</a>
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2025 – Jualan Ansuran Aircond LG. Waranti & pemasangan tertakluk kepada terma.</p>
+    </footer>
+  </main>
+
+  <!-- Sticky CTA (Mobile) -->
+  <div class="sticky-cta" aria-hidden="true">
+    <a class="btn" href="https://wa.me/601120592207" target="_blank" rel="noopener">Mohon WhatsApp 011‑2059 2207</a>
+  </div>
+
+  <script>
+    // ===== Data baharu: 2 pilihan (Putih & Hitam) =====
+    const MODEL_GROUPS = [
+      {
+        colorName: 'Putih', colorKey: 'putih', startFrom: 80,
+        slides: [
+          {type:'img', src:'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675"><defs><linearGradient id="gW" x1="0" x2="1"><stop offset="0" stop-color="%23ffffff"/><stop offset="1" stop-color="%23e5e7eb"/></linearGradient></defs><rect width="100%" height="100%" fill="url(%23gW)"/><text x="50%" y="50%" font-size="58" fill="%230f172a" text-anchor="middle" dominant-baseline="middle" font-family="Arial">LG – Putih</text></svg>'},
+          {type:'img', src:'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675"><rect width="100%" height="100%" fill="%23f3f4f6"/><text x="50%" y="50%" font-size="58" fill="%230f172a" text-anchor="middle" dominant-baseline="middle" font-family="Arial">Ruang Bilik / Ruang Tamu</text></svg>'}
+        ],
+        hpOptions: [
+          {label:'1.0HP', code:'1.0HP', monthly:80},
+          {label:'1.5HP', code:'1.5HP', monthly:90},
+          {label:'2.0HP', code:'2.0HP', monthly:110},
+          {label:'2.5HP', code:'2.5HP', monthly:120}
+        ]
+      },
+      {
+        colorName: 'Hitam (ArtCool)', colorKey: 'hitam', startFrom: 100,
+        slides: [
+          {type:'img', src:'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675"><rect width="100%" height="100%" fill="%23111"/><text x="50%" y="50%" font-size="58" fill="%23ffffff" text-anchor="middle" dominant-baseline="middle" font-family="Arial">LG – Hitam (ArtCool)</text></svg>'}
+        ],
+        hpOptions: [
+          {label:'1.5HP', code:'1.5HP', monthly:100},
+          {label:'2.5HP', code:'2.5HP', monthly:130}
+        ]
+      }
+    ];
+
+    const TESTIMONIALS = [
+      { type:'img', src:'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675"><rect width="100%" height="100%" fill="%230ea5e9"/><text x="50%" y="50%" font-size="60" fill="white" text-anchor="middle" dominant-baseline="middle" font-family="Arial">Gambar Pelanggan</text></svg>', quote:'Sejuk cepat, bil turun. Proses mohon senang & team pasang kemas!', meta:'Puan Aina, Puchong (Jul 2025)' },
+      { type:'video', src:'', poster:'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675"><rect width="100%" height="100%" fill="%23ef4444"/><text x="50%" y="50%" font-size="60" fill="white" text-anchor="middle" dominant-baseline="middle" font-family="Arial">Video Pemasangan (Placeholder)</text></svg>', quote:'Teknisi profesional, siap dalam masa yang dijanjikan. Recommended!', meta:'En. Faris, Shah Alam (Jun 2025)' },
+      { type:'img', src:'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675"><rect width="100%" height="100%" fill="%233b82f6"/><text x="50%" y="50%" font-size="60" fill="white" text-anchor="middle" dominant-baseline="middle" font-family="Arial">Gambar Rumah Pelanggan</text></svg>', quote:'Anak tidur lena, ruang tamu pun sejuk nyaman. Harga ansuran berbaloi.', meta:'Cik Zulaikha, Bangi (Mei 2025)' }
+    ];
+
+    // ===== Helpers =====
+    const $ = (sel, el=document) => el.querySelector(sel);
+    const $$ = (sel, el=document) => Array.from(el.querySelectorAll(sel));
+
+    // ===== Render 2 Kad (Putih & Hitam) =====
+    function renderModelGroups(){
+      const wrap = document.getElementById('modelsAcc');
+      wrap.innerHTML = '';
+      MODEL_GROUPS.forEach((m, idx)=>{
+        const item = document.createElement('div');
+        item.className = 'acc-item';
+        item.innerHTML = `
+          <div class="acc-head" role="button" aria-expanded="false">
+            <div class="label">
+              <span class="chip">${m.colorName}</span>
+              <div>
+                <div style="font-weight:800">Aircond LG – ${m.colorName}</div>
+                <div class="price">dari RM${m.startFrom}/bulan</div>
+              </div>
+            </div>
+            <svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 9l6 6 6-6" stroke="#0f172a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="acc-body" hidden>
+            <div class="slider" data-idx="${idx}" aria-label="Slider gambar ${m.colorName}">
+              <div class="slides"></div>
+              <button class="ctrl left" aria-label="Slaid sebelum">‹</button>
+              <button class="ctrl right" aria-label="Slaid seterusnya">›</button>
+              <div class="dots"></div>
+            </div>
+            <div class="spec">
+              <h3 style="margin:0">Lihat Detail</h3>
+              <p class="muted" style="margin:0;color:var(--muted)">Klik butang di bawah untuk pilih HP & lihat butang mohon.</p>
+              <div style="margin-top:8px"><button class="btn ghost" data-action="show-detail">Lihat Detail</button></div>
+
+              <div class="hp-picker" role="group" aria-label="Pilih HP"></div>
+              <div class="cta-wrap"></div>
+            </div>
+          </div>
+        `;
+        wrap.appendChild(item);
+
+        // Populate slides
+        const sWrap = $('.slides', item);
+        const dots = $('.dots', item);
+        m.slides.forEach((s, i)=>{
+          const sEl = document.createElement('div');
+          sEl.className = 'slide';
+          if(s.type==='img'){
+            const im = document.createElement('img');
+            im.src = s.src; im.alt = `Gambar ${m.colorName} ${i+1}`;
+            sEl.appendChild(im);
+          } else if (s.type==='video'){
+            const v = document.createElement('video');
+            v.src = s.src; v.muted = true; v.playsInline = true; v.controls = true; v.poster = s.poster || '';
+            sEl.appendChild(v);
+          }
+          sWrap.appendChild(sEl);
+          const d = document.createElement('button'); d.className = 'dot' + (i===0?' active':''); d.setAttribute('aria-label',`Pergi ke slaid ${i+1}`); dots.appendChild(d);
+        });
+
+        // Bind detail reveal + HP builder + CTA per card
+        const body = $('.acc-body', item);
+        const showBtn = $('[data-action="show-detail"]', item);
+        const hpPicker = $('.hp-picker', item);
+        const ctaWrap = $('.cta-wrap', item);
+        let selectedHP = null;
+
+        showBtn.addEventListener('click', ()=>{
+          // Build HP buttons once
+          if(!hpPicker.dataset.ready){
+            hpPicker.innerHTML = m.hpOptions.map(opt=>`<button class="hp-btn" type="button" data-hp="${opt.code}" data-monthly="${opt.monthly}">${opt.label}</button>`).join('');
+            hpPicker.dataset.ready = '1';
+            // Bind selection
+            $$('.hp-btn', hpPicker).forEach(btn=>{
+              btn.addEventListener('click', ()=>{
+                $$('.hp-btn', hpPicker).forEach(b=>b.setAttribute('aria-pressed','false'));
+                btn.setAttribute('aria-pressed','true');
+                selectedHP = btn.dataset.hp;
+                // Show CTA with WA prefill only after selection
+                ctaWrap.style.display = 'flex';
+                ctaWrap.innerHTML = `
+                  <a class="btn" href="https://wa.me/601120592207?text=${encodeURIComponent(`Saya nak mohon Aircond LG ${m.colorName} – ${selectedHP}`)}" target="_blank" rel="noopener">Mohon Model Ini</a>
+                  <a class="btn" style="background:linear-gradient(90deg,var(--brand-2),var(--brand))" href="#faq">Ada soalan?</a>
+                `;
+              });
+            });
+          }
+          hpPicker.style.display = 'flex';
+          ctaWrap.style.display = selectedHP ? 'flex' : 'none';
+        });
+      });
+
+      bindAccordion();
+      bindSliders();
+    }
+
+    // ===== Accordion Behaviour (auto-collapse others) =====
+    function bindAccordion(){
+      const items = $$('.acc-item');
+      items.forEach((it)=>{
+        const head = $('.acc-head', it);
+        const body = $('.acc-body', it);
+        head.addEventListener('click', (e)=>{
+          // Elak trigger bila klik butang "Lihat Detail" di dalam body
+          if(e.target && e.target.closest && e.target.closest('[data-action="show-detail"]')) return;
+          const isOpen = !body.hasAttribute('hidden');
+          // Close others
+          $$('.acc-item').forEach(other=>{
+            if(other!==it){
+              other.classList.remove('open');
+              $('.acc-body', other).setAttribute('hidden','');
+              $('.acc-head', other).setAttribute('aria-expanded','false');
+            }
+          });
+          if(isOpen){
+            it.classList.remove('open');
+            body.setAttribute('hidden','');
+            head.setAttribute('aria-expanded','false');
+          } else {
+            it.classList.add('open');
+            body.removeAttribute('hidden');
+            head.setAttribute('aria-expanded','true');
+          }
+        });
+      });
+    }
+
+    // ===== Slider Behaviour (touch + dots + arrows) =====
+    function bindSliders(){
+      $$('.slider').forEach(slider=>{
+        const slides = $('.slides', slider);
+        const dots = $$('.dot', slider);
+        const prev = $('.ctrl.left', slider);
+        const next = $('.ctrl.right', slider);
+        let i = 0; let startX = 0; let dx = 0; let w = slider.clientWidth;
+
+        const go = (n)=>{
+          i = (n+dots.length)%dots.length; // wrap
+          slides.style.transform = `translateX(${-i*100}%)`;
+          dots.forEach((d,idx)=>d.classList.toggle('active', idx===i));
+        };
+        const onPrev=()=>go(i-1); const onNext=()=>go(i+1);
+        prev.addEventListener('click', onPrev); next.addEventListener('click', onNext);
+        dots.forEach((d,idx)=> d.addEventListener('click', ()=>go(idx)) );
+
+        // touch
+        slides.addEventListener('touchstart', e=>{startX = e.touches[0].clientX; dx=0; w = slider.clientWidth;}, {passive:true});
+        slides.addEventListener('touchmove', e=>{dx = e.touches[0].clientX - startX;}, {passive:true});
+        slides.addEventListener('touchend', ()=>{ if(Math.abs(dx) > w*0.15){ dx<0 ? onNext() : onPrev(); } });
+
+        // Resize
+        new ResizeObserver(()=>{ w = slider.clientWidth; }).observe(slider);
+      });
+    }
+
+    // ===== Testimonials Renderer =====
+    function renderTestimonials(){
+      const row = document.getElementById('testiRow');
+      row.innerHTML = '';
+      TESTIMONIALS.forEach(t=>{
+        const card = document.createElement('article');
+        card.className = 't-card';
+        const media = document.createElement('div');
+        media.className = 't-media';
+        if(t.type==='img'){
+          const im = document.createElement('img'); im.src = t.src; im.alt = 'Gambar testimoni'; media.appendChild(im);
+        } else if (t.type==='video'){
+          const v = document.createElement('video'); v.controls = true; v.playsInline = true; v.muted = true; if(t.poster) v.poster = t.poster; media.appendChild(v);
+        }
+        const body = document.createElement('div'); body.className='t-body';
+        body.innerHTML = `<blockquote>“${t.quote}”</blockquote><div class="t-meta">${t.meta}</div>`;
+        card.appendChild(media); card.appendChild(body); row.appendChild(card);
+      });
+    }
+
+    // ===== Sticky CTA Visibility =====
+    function bindStickyCTA(){
+      const sticky = document.querySelector('.sticky-cta');
+      const hero = document.querySelector('.hero');
+      const io = new IntersectionObserver(([e])=>{
+        sticky.style.display = e.isIntersecting ? 'none' : 'block';
+      }, {threshold: 0.2});
+      io.observe(hero);
+    }
+
+    // Init
+    renderModelGroups();
+    renderTestimonials();
+    bindStickyCTA();
+  </script>
+</body>
+</html>
