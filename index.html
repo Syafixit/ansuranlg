@@ -25,7 +25,9 @@
     .hero p{color:var(--muted);margin:0 0 1rem}
     .hero .cards{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 18px}
     .hero-visual{background:#000;border-radius:var(--radius);box-shadow:var(--shadow);aspect-ratio:16/9;position:relative;overflow:hidden}
-    .hero-visual iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+    .hero-visual iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:1}
+    .unmute-btn{position:absolute;left:12px;bottom:12px;z-index:2;display:inline-flex;align-items:center;gap:.5rem;padding:10px 14px;border-radius:999px;border:0;cursor:pointer;background:rgba(15,23,42,.85);color:#fff;backdrop-filter:blur(6px);font-weight:700}
+    .unmute-btn.hidden{display:none}
     .sticky-cta{position:fixed;z-index:50;inset:auto 12px 12px 12px;display:none}
     .sticky-cta .btn{width:100%;justify-content:center}
 
@@ -123,7 +125,8 @@
         <a class="btn" href="https://wa.me/601120592207" target="_blank" rel="noopener">Mohon WhatsApp 011‑2059 2207</a>
       </div>
       <div class="hero-visual" aria-hidden="true">
-        <iframe src="https://www.youtube.com/embed/-SBVZapZ4-E?start=83&autoplay=1&mute=1&playsinline=1&controls=0&rel=0&modestbranding=1&loop=1&playlist=-SBVZapZ4-E" title="Aircond LG Video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+        <iframe id="heroVideo" src="https://www.youtube.com/embed/-SBVZapZ4-E?start=83&autoplay=1&mute=1&playsinline=1&controls=0&rel=0&modestbranding=1&loop=1&playlist=-SBVZapZ4-E&enablejsapi=1" title="Aircond LG Video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+        <button class="unmute-btn" id="unmuteBtn" aria-label="Hidupkan bunyi">🔊 Hidupkan bunyi</button>
       </div>
     </div>
   </header>
@@ -253,30 +256,30 @@
         const item = document.createElement('div');
         item.className = 'acc-item';
         item.innerHTML = `
-          <div class="acc-head" role="button" aria-expanded="false">
-            <div class="label">
-              <span class="chip">${m.colorName}</span>
+          <div class=\"acc-head\" role=\"button\" aria-expanded=\"false\">
+            <div class=\"label\">
+              <span class=\"chip\">${m.colorName}</span>
               <div>
-                <div style="font-weight:800">Aircond LG – ${m.colorName}</div>
-                <div class="price">dari RM${m.startFrom}/bulan</div>
+                <div style=\"font-weight:800\">Aircond LG – ${m.colorName}</div>
+                <div class=\"price\">dari RM${m.startFrom}/bulan</div>
               </div>
             </div>
-            <svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 9l6 6 6-6" stroke="#0f172a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg class=\"chev\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M6 9l6 6 6-6\" stroke=\"#0f172a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>
           </div>
-          <div class="acc-body" hidden>
-            <div class="slider" data-idx="${idx}" aria-label="Slider gambar ${m.colorName}">
-              <div class="slides"></div>
-              <button class="ctrl left" aria-label="Slaid sebelum">‹</button>
-              <button class="ctrl right" aria-label="Slaid seterusnya">›</button>
-              <div class="dots"></div>
+          <div class=\"acc-body\" hidden>
+            <div class=\"slider\" data-idx=\"${idx}\" aria-label=\"Slider gambar ${m.colorName}\">
+              <div class=\"slides\"></div>
+              <button class=\"ctrl left\" aria-label=\"Slaid sebelum\">‹</button>
+              <button class=\"ctrl right\" aria-label=\"Slaid seterusnya\">›</button>
+              <div class=\"dots\"></div>
             </div>
-            <div class="spec">
-              <h3 style="margin:0">Lihat Detail</h3>
-              <p class="muted" style="margin:0;color:var(--muted)">Klik butang di bawah untuk pilih HP & lihat butang mohon.</p>
-              <div style="margin-top:8px"><button class="btn ghost" data-action="show-detail">Lihat Detail</button></div>
+            <div class=\"spec\">
+              <h3 style=\"margin:0\">Lihat Detail</h3>
+              <p class=\"muted\" style=\"margin:0;color:var(--muted)\">Klik butang di bawah untuk pilih HP & lihat butang mohon.</p>
+              <div style=\"margin-top:8px\"><button class=\"btn ghost\" data-action=\"show-detail\">Lihat Detail</button></div>
 
-              <div class="hp-picker" role="group" aria-label="Pilih HP"></div>
-              <div class="cta-wrap"></div>
+              <div class=\"hp-picker\" role=\"group\" aria-label=\"Pilih HP\"></div>
+              <div class=\"cta-wrap\"></div>
             </div>
           </div>
         `;
@@ -428,6 +431,33 @@
     renderModelGroups();
     renderTestimonials();
     bindStickyCTA();
+
+    // ===== YouTube Player API: enable sound on user tap =====
+    (function(){
+      var tag=document.createElement('script');
+      tag.src='https://www.youtube.com/iframe_api';
+      var firstScriptTag=document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      window.heroPlayer = null;
+      window.onYouTubeIframeAPIReady = function(){
+        var el = document.getElementById('heroVideo');
+        if(!el) return;
+        window.heroPlayer = new YT.Player('heroVideo',{
+          events:{
+            onReady: function(){ try{ heroPlayer.mute(); heroPlayer.playVideo(); }catch(e){} }
+          }
+        });
+      };
+      var btn = document.getElementById('unmuteBtn');
+      if(btn){
+        btn.addEventListener('click', function(){
+          if(window.heroPlayer && heroPlayer.unMute){
+            try{ heroPlayer.unMute(); heroPlayer.setVolume(100); heroPlayer.playVideo(); }catch(e){}
+          }
+          btn.classList.add('hidden');
+        });
+      }
+    })();
   </script>
 </body>
 </html>
