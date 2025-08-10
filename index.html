@@ -127,7 +127,8 @@
         <a class="btn" href="https://wa.me/601120592207" target="_blank" rel="noopener">Mohon WhatsApp 011‑2059 2207</a>
       </div>
       <div class="hero-visual" aria-hidden="true">
-        <iframe id="heroVideo" src="https://www.youtube.com/embed/-SBVZapZ4-E?start=83&autoplay=1&mute=1&playsinline=1&controls=0&rel=0&modestbranding=1&loop=1&playlist=-SBVZapZ4-E&enablejsapi=1" title="Aircond LG Video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+        <!-- Video Hero (boleh bunyi bila user klik butang) -->
+        <iframe id="heroVideo" src="https://www.youtube.com/embed/-SBVZapZ4-E?autoplay=1&mute=1&playsinline=1&controls=0&rel=0&modestbranding=1&loop=1&playlist=-SBVZapZ4-E&enablejsapi=1" title="Aircond LG Video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
         <button class="unmute-btn" id="unmuteBtn" aria-label="Hidupkan bunyi">🔊 Hidupkan bunyi</button>
       </div>
     </div>
@@ -218,13 +219,13 @@
   </div>
 
   <script>
-    // ===== Data: 2 pilihan (Putih & Hitam) =====
+    // ===== Data: 4 pilihan (Putih, Hitam, Model 3, Model 4) =====
     const MODEL_GROUPS = [
       {
         colorName: 'Putih', colorKey: 'putih', startFrom: 80,
-        thumb: 'https://i.postimg.cc/gJ9sxNVn/large01.jpg',
+        thumb: 'https://i.postimg.cc/MKYg8Xcf/large01.jpg',
         slides: [
-          {type:'img', src:'https://i.postimg.cc/gJ9sxNVn/large01.jpg'},
+          {type:'img', src:'https://i.postimg.cc/MKYg8Xcf/large01.jpg'},
           {type:'img', src:'https://i.postimg.cc/HWqZJWt6/large07.jpg'},
           {type:'img', src:'https://i.postimg.cc/YCwQNJ5f/474942861-122213474960316575-7493288508286834841-n.jpg'}
         ],
@@ -260,7 +261,7 @@
     const $ = (sel, el=document) => el.querySelector(sel);
     const $$ = (sel, el=document) => Array.from(el.querySelectorAll(sel));
 
-    // ===== Render 2 Kad (Putih & Hitam) =====
+    // ===== Render Kad Model Dinamik =====
     function renderModelGroups(){
       const wrap = document.getElementById('modelsAcc');
       wrap.innerHTML = '';
@@ -268,31 +269,31 @@
         const item = document.createElement('div');
         item.className = 'acc-item';
         item.innerHTML = `
-          <div class=\"acc-head\" role=\"button\" aria-expanded=\"false\">
-            <div class=\"label\">
-              ${m.thumb ? `<img class=\"thumb\" src=\"${m.thumb}\" alt=\"Thumbnail ${m.colorName}\">` : ''}
-              <span class=\"chip\">${m.colorName}</span>
+          <div class="acc-head" role="button" aria-expanded="false">
+            <div class="label">
+              ${m.thumb ? `<img class="thumb" src="${m.thumb}" alt="Thumbnail ${m.colorName}">` : ''}
+              <span class="chip">${m.colorName}</span>
               <div>
-                <div style=\"font-weight:800\">Aircond LG – ${m.colorName}</div>
-                <div class=\"price\">dari RM${m.startFrom}/bulan</div>
+                <div style="font-weight:800">Aircond LG – ${m.colorName}</div>
+                <div class="price">dari RM${m.startFrom}/bulan</div>
               </div>
             </div>
-            <svg class=\"chev\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M6 9l6 6 6-6\" stroke=\"#0f172a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>
+            <svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 9l6 6 6-6" stroke="#0f172a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
-          <div class=\"acc-body\" hidden>
-            <div class=\"slider\" data-idx=\"${idx}\" aria-label=\"Slider gambar ${m.colorName}\">
-              <div class=\"slides\"></div>
-              <button class=\"ctrl left\" aria-label=\"Slaid sebelum\">‹</button>
-              <button class=\"ctrl right\" aria-label=\"Slaid seterusnya\">›</button>
-              <div class=\"dots\"></div>
+          <div class="acc-body" hidden>
+            <div class="slider" data-idx="${idx}" aria-label="Slider gambar ${m.colorName}">
+              <div class="slides"></div>
+              <button class="ctrl left" aria-label="Slaid sebelum">‹</button>
+              <button class="ctrl right" aria-label="Slaid seterusnya">›</button>
+              <div class="dots"></div>
             </div>
-            <div class=\"spec\">
-              <h3 style=\"margin:0\">Lihat Detail</h3>
-              <p class=\"muted\" style=\"margin:0;color:var(--muted)\">Klik butang di bawah untuk pilih HP & lihat butang mohon.</p>
-              <div style=\"margin-top:8px\"><button class=\"btn ghost\" data-action=\"show-detail\">Lihat Detail</button></div>
+            <div class="spec">
+              <h3 style="margin:0">Lihat Detail</h3>
+              <p class="muted" style="margin:0;color:var(--muted)">Klik butang di bawah untuk pilih HP & lihat butang mohon.</p>
+              <div style="margin-top:8px"><button class="btn ghost" data-action="show-detail">Lihat Detail</button></div>
 
-              <div class=\"hp-picker\" role=\"group\" aria-label=\"Pilih HP\"></div>
-              <div class=\"cta-wrap\"></div>
+              <div class="hp-picker" role="group" aria-label="Pilih HP"></div>
+              <div class="cta-wrap"></div>
             </div>
           </div>
         `;
@@ -319,23 +320,21 @@
 
         // Bind detail reveal + HP builder + CTA per card
         const body = $('.acc-body', item);
+        const head = $('.acc-head', item);
         const showBtn = $('[data-action="show-detail"]', item);
         const hpPicker = $('.hp-picker', item);
         const ctaWrap = $('.cta-wrap', item);
         let selectedHP = null;
 
         showBtn.addEventListener('click', ()=>{
-          // Build HP buttons once
           if(!hpPicker.dataset.ready){
             hpPicker.innerHTML = m.hpOptions.map(opt=>`<button class="hp-btn" type="button" data-hp="${opt.code}" data-monthly="${opt.monthly}">${opt.label}</button>`).join('');
             hpPicker.dataset.ready = '1';
-            // Bind selection
             $$('.hp-btn', hpPicker).forEach(btn=>{
               btn.addEventListener('click', ()=>{
                 $$('.hp-btn', hpPicker).forEach(b=>b.setAttribute('aria-pressed','false'));
                 btn.setAttribute('aria-pressed','true');
                 selectedHP = btn.dataset.hp;
-                // Show CTA with WA prefill only after selection
                 ctaWrap.style.display = 'flex';
                 ctaWrap.innerHTML = `
                   <a class="btn" href="https://wa.me/601120592207?text=${encodeURIComponent(`Saya nak mohon Aircond LG ${m.colorName} – ${selectedHP}`)}" target="_blank" rel="noopener">Mohon Model Ini</a>
@@ -347,39 +346,31 @@
           hpPicker.style.display = 'flex';
           ctaWrap.style.display = selectedHP ? 'flex' : 'none';
         });
-      });
 
-      bindAccordion();
-      bindSliders();
-    }
-
-    // ===== Accordion Behaviour (auto-collapse others) =====
-    function bindAccordion(){
-      const items = $$('.acc-item');
-      items.forEach((it)=>{
-        const head = $('.acc-head', it);
-        const body = $('.acc-body', it);
+        // Accordion behaviour (auto-collapse)
         head.addEventListener('click', (e)=>{
           if(e.target && e.target.closest && e.target.closest('[data-action="show-detail"]')) return;
           const isOpen = !body.hasAttribute('hidden');
           $$('.acc-item').forEach(other=>{
-            if(other!==it){
+            if(other!==item){
               other.classList.remove('open');
               $('.acc-body', other).setAttribute('hidden','');
               $('.acc-head', other).setAttribute('aria-expanded','false');
             }
           });
           if(isOpen){
-            it.classList.remove('open');
+            item.classList.remove('open');
             body.setAttribute('hidden','');
             head.setAttribute('aria-expanded','false');
           } else {
-            it.classList.add('open');
+            item.classList.add('open');
             body.removeAttribute('hidden');
             head.setAttribute('aria-expanded','true');
           }
         });
       });
+
+      bindSliders();
     }
 
     // ===== Slider Behaviour (touch + dots + arrows) =====
@@ -392,7 +383,7 @@
         let i = 0; let startX = 0; let dx = 0; let w = slider.clientWidth;
 
         const go = (n)=>{
-          i = (n+dots.length)%dots.length; // wrap
+          i = (n+dots.length)%dots.length;
           slides.style.transform = `translateX(${-i*100}%)`;
           dots.forEach((d,idx)=>d.classList.toggle('active', idx===i));
         };
@@ -400,12 +391,10 @@
         prev.addEventListener('click', onPrev); next.addEventListener('click', onNext);
         dots.forEach((d,idx)=> d.addEventListener('click', ()=>go(idx)) );
 
-        // touch
         slides.addEventListener('touchstart', e=>{startX = e.touches[0].clientX; dx=0; w = slider.clientWidth;}, {passive:true});
         slides.addEventListener('touchmove', e=>{dx = e.touches[0].clientX - startX;}, {passive:true});
         slides.addEventListener('touchend', ()=>{ if(Math.abs(dx) > w*0.15){ dx<0 ? onNext() : onPrev(); } });
 
-        // Resize
         new ResizeObserver(()=>{ w = slider.clientWidth; }).observe(slider);
       });
     }
@@ -452,7 +441,7 @@
     renderTestimonials();
     bindStickyCTA();
 
-    // ===== YouTube Player API: enable sound on user tap =====
+    // ===== YouTube Player API: enable sound on user tap (Hero) =====
     (function(){
       var tag=document.createElement('script');
       tag.src='https://www.youtube.com/iframe_api';
