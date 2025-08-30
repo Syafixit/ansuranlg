@@ -5,28 +5,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Aircond LG Ansuran – Mohon Sekarang</title>
   <meta name="description" content="Aircond LG – Sejuk Cepat, Jimat Tenaga. Ansuran serendah RM80/bulan. Pemasangan asas percuma, waranti compressor 10 tahun. Mohon WhatsApp 011-2059 2207."/>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+
   <style>
     html{ scroll-behavior:smooth; }
+    
+/* PALET WARNA & SHADOW BARU */
 :root{
-      --bg:#f7fafc; --surface:#0b1220; --card:#ffffff; --ink:#0f172a; --muted:#475569; --brand:#ef4444; --brand-2:#3b82f6; --ok:#16a34a; --ring: rgba(59,130,246,.35);
-      --radius:16px; --shadow:0 12px 30px rgba(0,0,0,.08);
+      --bg:#f5f5f5; --surface:#212529; --card:#ffffff; --ink:#212529; --muted:#495057; --brand:#e63946; --brand-2:#2a9d8f; --ok:#16a34a; --ring: rgba(59,130,246,.35);
+      --radius:16px; 
+      --shadow: 0 4px 20px rgba(0,0,0,.08), 0 1px 4px rgba(0,0,0,.04);
     }
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Helvetica,Arial}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font:16px/1.6 'Inter', system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Helvetica,Arial}
     a{color:inherit}
     .container{max-width:1100px;margin:auto;padding:24px}
-    .btn{display:inline-flex;align-items:center;gap:.6rem;padding:14px 20px;border-radius:999px;border:0;cursor:pointer;font-weight:700;text-decoration:none;background:linear-gradient(90deg,var(--brand),var(--brand-2));color:#fff;box-shadow:0 10px 20px rgba(239,68,68,.15);transition:transform .15s ease, filter .15s ease}
-    .btn:hover{transform:translateY(-1px);filter:saturate(1.05)}
+    .btn{display:inline-flex;align-items:center;gap:.6rem;padding:14px 20px;border-radius:999px;border:0;cursor:pointer;font-weight:700;text-decoration:none;background:linear-gradient(90deg,var(--brand),var(--brand-2));color:#fff;box-shadow:0 10px 20px rgba(239,68,68,.15);transition:transform .2s ease, box-shadow .2s ease, filter .2s ease}
+    .btn:hover{transform:translateY(-2px);box-shadow:0 14px 25px rgba(239,68,68,.25);filter:saturate(1.05)}
 
     /* HERO */
-    .hero{background: radial-gradient(1200px 600px at 10% -10%, #1f2937 0%, #0b1220 55%, #0a0f1a 100%);color:#f8fafc;padding:56px 0 32px}
+    .hero{background: radial-gradient(1200px 600px at 10% -10%, #212529 0%, #0b1220 55%, #0a0f1a 100%);color:#f8fafc;padding:56px 0 32px}
     .hero-wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center}
     .hero-copy{max-width:680px}
     .promo-pill{display:inline-block;padding:8px 14px;border-radius:999px;background:#fee2e2;color:#7f1d1d;font-weight:800;box-shadow:0 6px 18px rgba(2,6,23,.08)}
+    
+    /* ANIMASI HERO */
+    @keyframes fadeInSlideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero-title, .hero-sub {
+        animation: fadeInSlideUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        opacity: 0;
+    }
+    .hero-sub { animation-delay: 0.2s; }
     .hero-title{font-size:clamp(1.9rem,3.2vw,3rem);line-height:1.15;margin:.8rem 0 .4rem;font-weight:900}
     .hero-title .hl{color:#f59e0b}
     .hero-sub{color:#e5e7eb;margin:0 0 .8rem}
-    .hero-features{display:flex;gap:14px;flex-wrap:wrap;list-style:none;margin:10px 0 18px;padding:0;color:#cbd5e1;font-weight:600;font-weight:600}
+    .hero-features{display:flex;gap:14px;flex-wrap:wrap;list-style:none;margin:10px 0 18px;padding:0;color:#cbd5e1;font-weight:600}
     .cta-inline{display:flex;gap:14px;align-items:center;margin:10px 0 16px}
     .btn.btn-xl{padding:16px 22px;font-size:1.05rem}
     .hero-input{flex:1 1 240px;min-width:220px;height:48px;padding:10px 14px;border:0;outline:none;border-radius:14px;background:#fff;color:#0f172a;box-shadow: inset 0 0 0 1px rgba(100,116,139,.2), 0 10px 22px rgba(2,6,23,.06)}
@@ -40,6 +59,17 @@
     .sticky-cta{position:fixed;z-index:50;inset:auto 12px 12px 12px;display:none}
     .sticky-cta .btn{width:100%;justify-content:center}
 
+    /* SCROLL REVEAL (Semua kad) */
+    .reveal {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
     /* Masalah Biasa */
     .problems{padding:26px 0}
     .problems h2{margin:0 0 16px;text-align:center}
@@ -49,11 +79,11 @@
     .problem-card p{margin:0;color:#475569;font-size:.92rem}
 
     /* WHY Section (dark card, centered) */
-    .why{padding:40px 24px;margin:40px auto;border-radius:20px;background:#0b1220;color:#e5e7eb;box-shadow:0 12px 30px rgba(0,0,0,.18);max-width:1100px}
+    .why{padding:40px 24px;margin:40px auto;border-radius:20px;background:var(--surface);color:#e5e7eb;box-shadow:0 12px 30px rgba(0,0,0,.18);max-width:1100px}
     .why > h2{margin:0 0 24px;color:#fff;text-align:center;font-size:clamp(1.4rem,2.6vw,2.4rem)}
     .why-grid{display:grid;gap:20px;grid-template-columns:repeat(3,1fr)}
-    .why-card{background:#1f2937;border-radius:18px;padding:24px;box-shadow:0 8px 20px rgba(0,0,0,.25);text-align:center}
-    .why-card .v-ico{font-size:44px;line-height:1;margin-bottom:10px;color:#ef4444;display:inline-block}
+    .why-card{background:#2a3038;border-radius:18px;padding:24px;box-shadow:0 8px 20px rgba(0,0,0,.25);text-align:center}
+    .why-card .v-ico{font-size:44px;line-height:1;margin-bottom:10px;color:var(--brand);display:inline-block}
     .why-card h3{margin:6px 0 8px;color:#fff;font-size:1.25rem}
     .why-card p{margin:0;color:#cbd5e1;font-size:1rem}
 
@@ -62,7 +92,7 @@
     .models h2{margin:0 0 10px}
     .acc{display:grid;gap:12px}
     .acc-item{background:#ffffff;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
-    .acc-head{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;cursor:pointer}
+    .acc-head{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;cursor:pointer;transition: background .15s ease}
     .acc-head:hover{background:#f9fafb}
     .label{display:flex;gap:12px;align-items:center}
     .thumb{width:64px;height:40px;object-fit:cover;border-radius:8px;box-shadow:0 3px 10px rgba(2,6,23,.1)}
@@ -70,7 +100,22 @@
     .price{font-weight:800;color:#16a34a}
     .chev{transition:transform .2s ease}
     .acc-item.open .chev{transform:rotate(180deg)}
-    .acc-body{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;padding:16px;border-top:1px solid #e5e7eb}
+
+    /* ANIMASI ACCORDION */
+    .acc-body{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:18px;
+      padding: 0 16px;
+      border-top:1px solid #e5e7eb;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .acc-item.open .acc-body{
+      max-height: 600px; /* Cukup besar untuk semua kandungan */
+      padding: 16px;
+    }
     .spec{display:grid;gap:10px}
 
     /* Slider */
@@ -88,8 +133,9 @@
 
     /* HP picker */
     .hp-picker{display:none;gap:8px;flex-wrap:wrap;margin:6px 0 10px}
-    .hp-btn{padding:8px 12px;border-radius:999px;border:1px solid #e5e7eb;background:#fff;color:#0f172a;cursor:pointer}
-    .hp-btn[aria-pressed="true"]{outline:3px solid var(--ring);border-color:#93c5fd}
+    .hp-btn{padding:8px 12px;border-radius:999px;border:1px solid #e5e7eb;background:#fff;color:#0f172a;cursor:pointer;transition:all .2s ease}
+    .hp-btn:hover{background: #f1f5f9}
+    .hp-btn[aria-pressed="true"]{outline:3px solid var(--ring);border-color:#93c5fd; background:#e0f2fe}
     .cta-wrap{display:none;gap:10px;flex-wrap:wrap}
 
     /* PROCESS */
@@ -117,24 +163,23 @@
     /* CTA */
     .cta-end{background:linear-gradient(90deg,#fee2e2,#e0f2fe);border-radius:var(--radius);padding:18px;display:grid;gap:8px;align-items:center;box-shadow:var(--shadow);color:#0f172a}
     footer{padding:26px 0;color:#64748b;font-size:.95rem}
-
     
-/* GALLERY */
-.gallery{padding:26px 0}
-.gallery h2{margin:0 0 14px;text-align:center}
-.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.gallery-grid button{padding:0;border:0;background:transparent;cursor:pointer;line-height:0;border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
-.gallery-grid img{width:100%;height:100%;aspect-ratio:1/1;object-fit:cover;display:block;transition:transform .2s ease}
-.gallery-grid button:hover img{transform:scale(1.03)}
-/* Lightbox */
-.lightbox{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(2,6,23,.85);backdrop-filter:blur(4px);z-index:100}
-.lightbox[hidden]{display:none}
-.lightbox-inner{max-width:min(1000px,92vw);max-height:88vh;position:relative}
-.lightbox-img{max-width:100%;max-height:88vh;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
-.lightbox-close{position:absolute;top:-12px;right:-12px;background:#fff;border:0;border-radius:999px;width:40px;height:40px;display:grid;place-items:center;cursor:pointer;box-shadow:var(--shadow);font-weight:900}
-@media (max-width:900px){.gallery-grid{grid-template-columns:repeat(2,1fr)}}
+    /* GALLERY */
+    .gallery{padding:26px 0}
+    .gallery h2{margin:0 0 14px;text-align:center}
+    .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .gallery-grid button{padding:0;border:0;background:transparent;cursor:pointer;line-height:0;border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
+    .gallery-grid img{width:100%;height:100%;aspect-ratio:1/1;object-fit:cover;display:block;transition:transform .3s cubic-bezier(0.25, 0.46, 0.45, 0.94)}
+    .gallery-grid button:hover img{transform:scale(1.05)}
+    /* Lightbox */
+    .lightbox{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(2,6,23,.85);backdrop-filter:blur(4px);z-index:100}
+    .lightbox[hidden]{display:none}
+    .lightbox-inner{max-width:min(1000px,92vw);max-height:88vh;position:relative}
+    .lightbox-img{max-width:100%;max-height:88vh;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+    .lightbox-close{position:absolute;top:-12px;right:-12px;background:#fff;border:0;border-radius:999px;width:40px;height:40px;display:grid;place-items:center;cursor:pointer;box-shadow:var(--shadow);font-weight:900}
+    @media (max-width:900px){.gallery-grid{grid-template-columns:repeat(2,1fr)}}
 
-/* Responsive */
+    /* Responsive */
     @media (max-width: 900px){
       .hero{padding:38px 0 18px}
       .hero-wrap{grid-template-columns:1fr}
@@ -150,7 +195,6 @@
   </style>
 </head>
 <body>
-  <!-- HERO -->
   <header class="hero">
     <div class="container hero-wrap">
       <div class="hero-copy">
@@ -176,17 +220,15 @@
     </div>
   </header>
 
-  <!-- Masalah Biasa -->
   <section class="problems container" aria-labelledby="masalah">
     <h2 id="masalah">Anda ada masalah ni?</h2>
     <div class="problems-grid">
-      <div class="problem-card"><h4>💡 Bil elektrik melambung?</h4><p>LG Dual Inverter lebih efisien – suhu stabil, penggunaan kuasa lebih rendah.</p></div>
-      <div class="problem-card"><h4>🔧 Risau kos servis & alat ganti?</h4><p>Servis berkala & waranti dibekalkan sepanjang kontrak ansuran.</p></div>
-      <div class="problem-card"><h4>🛡️ Udara berhabuk & alergi?</h4><p>Plasmaster Ionizer++ & penapisan membantu udara kekal bersih.</p></div>
+      <div class="problem-card reveal"><h4>💡 Bil elektrik melambung?</h4><p>LG Dual Inverter lebih efisien – suhu stabil, penggunaan kuasa lebih rendah.</p></div>
+      <div class="problem-card reveal"><h4>🔧 Risau kos servis & alat ganti?</h4><p>Servis berkala & waranti dibekalkan sepanjang kontrak ansuran.</p></div>
+      <div class="problem-card reveal"><h4>🛡️ Udara berhabuk & alergi?</h4><p>Plasmaster Ionizer++ & penapisan membantu udara kekal bersih.</p></div>
     </div>
   </section>
 
-<!-- GALLERY -->
 <section class="gallery container" aria-labelledby="galeri">
   <h2 id="galeri">Jom dapatkan Aircond LG Ansuran dari Syafiq.</h2>
   <div class="gallery-grid">
@@ -202,7 +244,6 @@
   </div>
 </section>
 
-<!-- Lightbox (popup imej besar) -->
 <div class="lightbox" id="lightbox" hidden aria-modal="true" role="dialog">
   <div class="lightbox-inner">
     <img class="lightbox-img" id="lightboxImg" alt="Pratonton gambar">
@@ -210,21 +251,19 @@
   </div>
 </div>
 
-<!-- WHY -->
-  <section class="why" aria-labelledby="kenapa">
+<section class="why" aria-labelledby="kenapa">
     <h2 id="kenapa">Kenapa Pilih Ansuran LG?</h2>
     <div class="why-grid">
-      <article class="why-card"><div class="v-ico">💳</div><h1>Serendah RM80/bulan (belum promosi)</h3><p>Miliki aircond premium tanpa membebankan.</p></article>
-      <article class="why-card"><div class="v-ico">🛠️</div><h1>Pemasangan Asas PERCUMA</h3><p>Jimat kos pemasangan sehingga RM250.</p></article>
-      <article class="why-card"><div class="v-ico">🛡️</div><h3>Waranti 10 Tahun Compressor</h3><p ></> Rasa tenang untuk jangka masa panjang.</p></article>
-      <article class="why-card"><div class="v-ico">🧰</div><h3>Servis Berkala PERCUMA</h3><p>Aircond sentiasa pada prestasi terbaik.</p></article>
-      <article class="why-card"><div class="v-ico">🧾</div><h3>Tiada Deposit</h3><p>Permohonan mudah tanpa membebankan.</p></article>
-      <article class="why-card"><div class="v-ico">🚀</div><h3>Proses Cepat & Mudah</h3><p>Kelulusan pantas, pemasangan dalam beberapa hari.</p></article>
+      <article class="why-card reveal"><div class="v-ico">💳</div><h3>Serendah RM80/bulan (belum promosi)</h3><p>Miliki aircond premium tanpa membebankan.</p></article>
+      <article class="why-card reveal"><div class="v-ico">🛠️</div><h3>Pemasangan Asas PERCUMA</h3><p>Jimat kos pemasangan sehingga RM250.</p></article>
+      <article class="why-card reveal"><div class="v-ico">🛡️</div><h3>Waranti 10 Tahun Compressor</h3><p > Rasa tenang untuk jangka masa panjang.</p></article>
+      <article class="why-card reveal"><div class="v-ico">🧰</div><h3>Servis Berkala PERCUMA</h3><p>Aircond sentiasa pada prestasi terbaik.</p></article>
+      <article class="why-card reveal"><div class="v-ico">🧾</div><h3>Tiada Deposit</h3><p>Permohonan mudah tanpa membebankan.</p></article>
+      <article class="why-card reveal"><div class="v-ico">🚀</div><h3>Proses Cepat & Mudah</h3><p>Kelulusan pantas, pemasangan dalam beberapa hari.</p></article>
     </div>
   </section>
 
   <main class="container">
-    <!-- Models -->
     <section class="models" aria-labelledby="model">
       <h2 id="model">Pilihan Model & Harga</h2>
       <div class="acc" id="modelsAcc"></div>
@@ -235,24 +274,21 @@
       </div>
     </section>
 
-    <!-- Process -->
     <section class="process" aria-labelledby="proses">
       <h2 id="proses">Cara Mohon (4 Langkah)</h2>
       <div class="steps">
-        <div class="step"><h4>1. Pilih Model</h4><p>Pilih HP & ciri mengikut saiz ruang.</p></div>
-        <div class="step"><h4>2. Bagi Detail </h4><p>Nama, IC, Alamat Pemasangan, Emel – semudah ABC.</p></div>
-        <div class="step"><h4>3. Isi Borang di Sistem LG</h4><p>Kelulusan dalam 2 hari, tiada deposit.</p></div>
-        <div class="step"><h4>4. Pasang & Guna</h4><p>Temujanji pemasangan, terus nikmati Aircond LG.</p></div>
+        <div class="step reveal"><h4>1. Pilih Model</h4><p>Pilih HP & ciri mengikut saiz ruang.</p></div>
+        <div class="step reveal"><h4>2. Bagi Detail </h4><p>Nama, IC, Alamat Pemasangan, Emel – semudah ABC.</p></div>
+        <div class="step reveal"><h4>3. Isi Borang di Sistem LG</h4><p>Kelulusan dalam 2 hari, tiada deposit.</p></div>
+        <div class="step reveal"><h4>4. Pasang & Guna</h4><p>Temujanji pemasangan, terus nikmati Aircond LG.</p></div>
       </div>
     </section>
 
-    <!-- Testimonials -->
     <section class="testi" aria-labelledby="testi">
       <h2 id="testi">Testimoni Pelanggan</h2>
       <div class="testi-row" id="testiRow"></div>
     </section>
 
-    <!-- FAQ -->
     <section class="faq" aria-labelledby="faq">
       <h2 id="faq">Soalan Lazim</h2>
       <details><summary>Dokumen apa diperlukan?</summary><p>Salinan IC (depan & belakang) & Kad Bank (Depan), Penyata Bank 3 bulan.</p></details>
@@ -263,7 +299,6 @@
       <details><summary>Bil elektrik naik tak?</summary><p>Model DUAL Inverter + 5★ Energy membantu lebih jimat berbanding biasa, bergantung pola penggunaan.</p></details>
     </section>
 
-    <!-- CTA End -->
     <section class="cta-end">
       <div>
         <h3 style="margin:0">NAK SEJUKKAN bilik dari RM80 sebulan? Biar Syafiq bantu sampai LULUS – Stok Terhad</h3>
@@ -277,7 +312,6 @@
     <footer><p>© 2025 – Jualan Ansuran Aircond LG. Waranti & pemasangan tertakluk kepada terma.</p></footer>
   </main>
 
-  <!-- Sticky CTA -->
   <div class="sticky-cta" aria-hidden="true">
     <a class="btn" href="https://wa.me/601120592207?text=Syafiq%2C%20tolong%20kira%20ansuran%20aircond%20LG%20saya" target="_blank" rel="noopener">Whatsapp Syafiq Sekarang</a>
   </div>
@@ -333,7 +367,8 @@
 
     MODEL_GROUPS.forEach((m, idx)=>{
       const item = document.createElement('div');
-      item.className = 'acc-item';
+      item.className = 'acc-item reveal'; /* Tambah reveal class */
+      item.style.transitionDelay = `${idx * 0.1}s`; /* Animasi berperingkat */
       item.innerHTML = `
         <div class="acc-head" role="button" aria-expanded="false" tabindex="0">
           <div class="label">
@@ -347,7 +382,7 @@
           <svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#0f172a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
 
-        <div class="acc-body" hidden>
+        <div class="acc-body">
           <div class="slider" data-idx="${idx}" aria-label="Slider gambar ${m.colorName}">
             <div class="slides"></div>
             <button class="ctrl left" aria-label="Slaid sebelum">‹</button>
@@ -389,13 +424,13 @@
       }
 
       function toggle(open){
-        if(open){ item.classList.add('open'); body.removeAttribute('hidden'); head.setAttribute('aria-expanded','true'); loadSlides(); bindSliders(item); }
-        else { item.classList.remove('open'); body.setAttribute('hidden',''); head.setAttribute('aria-expanded','false'); }
+        if(open){ item.classList.add('open'); head.setAttribute('aria-expanded','true'); loadSlides(); bindSliders(item); }
+        else { item.classList.remove('open'); head.setAttribute('aria-expanded','false'); }
       }
 
       head.addEventListener('click', ()=>{
-        const isOpen = !body.hasAttribute('hidden');
-        $$('.acc-item').forEach(other=>{ if(other!==item){ other.classList.remove('open'); $('.acc-body', other).setAttribute('hidden',''); $('.acc-head', other).setAttribute('aria-expanded','false'); }});
+        const isOpen = item.classList.contains('open');
+        $$('.acc-item').forEach(other=>{ if(other!==item){ other.classList.remove('open'); $('.acc-head', other).setAttribute('aria-expanded','false'); }});
         toggle(!isOpen);
       });
       head.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') { e.preventDefault(); head.click(); }});
@@ -411,7 +446,7 @@
               selectedHP = btn.dataset.hp;
               ctaWrap.style.display = 'flex';
               ctaWrap.innerHTML = `
-                <a class=\"btn\" href=\"https://wa.me/601120592207?text=${encodeURIComponent('Saya nak mohon Aircond LG ' + m.colorName + ' – ' + '${selectedHP}')}\" target=\"_blank\" rel=\"noopener\">Mohon Model Ini</a>
+                <a class=\"btn\" href=\"https://wa.me/601120592207?text=${encodeURIComponent('Saya nak mohon Aircond LG ' + m.colorName + ' – ' + selectedHP)}\" target=\"_blank\" rel=\"noopener\">Mohon Model Ini</a>
                 <a class=\"btn\" style=\"background:linear-gradient(90deg,var(--brand-2),var(--brand))\" href=\"#faq\">Ada soalan?</a>
               `;
             });
@@ -469,6 +504,21 @@
     const io = new IntersectionObserver(([e])=>{ sticky.style.display = e.isIntersecting ? 'none' : 'block'; }, {threshold: 0.2});
     io.observe(hero);
   }
+
+  /* ====== SCROLL REVEAL ANIMATION SCRIPT ====== */
+  document.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.2
+    });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  });
 
   /* ====== INIT ====== */
   renderModelGroups();
