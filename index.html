@@ -6,7 +6,8 @@
   <title>Aircond LG Ansuran – Mohon Sekarang</title>
   <meta name="description" content="Aircond LG – Sejuk Cepat, Jimat Tenaga. Ansuran serendah RM80/bulan. Pemasangan asas percuma, waranti compressor 10 tahun. Mohon WhatsApp 011-2059 2207."/>
   <style>
-    :root{
+    html{ scroll-behavior:smooth; }
+:root{
       --bg:#f7fafc; --surface:#0b1220; --card:#ffffff; --ink:#0f172a; --muted:#475569; --brand:#ef4444; --brand-2:#3b82f6; --ok:#16a34a; --ring: rgba(59,130,246,.35);
       --radius:16px; --shadow:0 12px 30px rgba(0,0,0,.08);
     }
@@ -117,7 +118,23 @@
     .cta-end{background:linear-gradient(90deg,#fee2e2,#e0f2fe);border-radius:var(--radius);padding:18px;display:grid;gap:8px;align-items:center;box-shadow:var(--shadow);color:#0f172a}
     footer{padding:26px 0;color:#64748b;font-size:.95rem}
 
-    /* Responsive */
+    
+/* GALLERY */
+.gallery{padding:26px 0}
+.gallery h2{margin:0 0 14px;text-align:center}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.gallery-grid button{padding:0;border:0;background:transparent;cursor:pointer;line-height:0;border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
+.gallery-grid img{width:100%;height:100%;aspect-ratio:1/1;object-fit:cover;display:block;transition:transform .2s ease}
+.gallery-grid button:hover img{transform:scale(1.03)}
+/* Lightbox */
+.lightbox{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(2,6,23,.85);backdrop-filter:blur(4px);z-index:100}
+.lightbox[hidden]{display:none}
+.lightbox-inner{max-width:min(1000px,92vw);max-height:88vh;position:relative}
+.lightbox-img{max-width:100%;max-height:88vh;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.lightbox-close{position:absolute;top:-12px;right:-12px;background:#fff;border:0;border-radius:999px;width:40px;height:40px;display:grid;place-items:center;cursor:pointer;box-shadow:var(--shadow);font-weight:900}
+@media (max-width:900px){.gallery-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* Responsive */
     @media (max-width: 900px){
       .hero{padding:38px 0 18px}
       .hero-wrap{grid-template-columns:1fr}
@@ -144,9 +161,9 @@
           <li>❄️ Sejuk Cepat</li><li>🛡️ Plasmaster Ionizer++</li><li>📱 ThinQ (Wi‑Fi)</li><li>🔧 Servis Percuma</li>
         </ul>
         <div class="cta-inline">
-          <a class="btn btn-xl" href="https://wa.me/601120592207?text=Syafiq%2C%20tolong%20kira%20ansuran%20aircond%20LG%20saya" target="_blank" rel="noopener">Whatsapp Syafiq Sekarang</a>
-          <input class="hero-input" type="text" inputmode="numeric" placeholder="Contoh: Poskod / Saiz bilik">
-        </div>
+  <a class="btn btn-xl" href="https://wa.me/601120592207?text=Syafiq%2C%20tolong%20kira%20ansuran%20aircond%20LG%20saya" target="_blank" rel="noopener">Whatsapp Syafiq Sekarang</a>
+  <a class="btn btn-xl" style="background:linear-gradient(90deg,var(--brand-2),var(--brand))" href="#model">Lihat Model &amp; Harga</a>
+</div>
         <div class="trust-row" role="group" aria-label="Maklumat kepercayaan">
           <span class="trust-badge">✅ Ejen Sah LG (Kod: M236163)</span>
           <span class="trust-badge">📞 Hotline LG HQ: 1-800-18-7874</span>
@@ -169,7 +186,31 @@
     </div>
   </section>
 
-  <!-- WHY -->
+<!-- GALLERY -->
+<section class="gallery container" aria-labelledby="galeri">
+  <h2 id="galeri">Jom dapatkan Aircond LG Ansuran dari Syafiq.</h2>
+  <div class="gallery-grid">
+    <button data-full="https://i.postimg.cc/MKYg8Xcf/large01.jpg"><img src="https://i.postimg.cc/MKYg8Xcf/large01.jpg" alt="Galeri 1"></button>
+    <button data-full="https://i.postimg.cc/HWqZJWt6/large07.jpg"><img src="https://i.postimg.cc/HWqZJWt6/large07.jpg" alt="Galeri 2"></button>
+    <button data-full="https://i.postimg.cc/YCwQNJ5f/474942861-122213474960316575-7493288508286834841-n.jpg"><img src="https://i.postimg.cc/YCwQNJ5f/474942861-122213474960316575-7493288508286834841-n.jpg" alt="Galeri 3"></button>
+    <button data-full="https://i.postimg.cc/Y0Mx30y7/thum-1600x1062.jpg"><img src="https://i.postimg.cc/Y0Mx30y7/thum-1600x1062.jpg" alt="Galeri 4"></button>
+    <button data-full="https://i.postimg.cc/sXpc77mK/thum-1600x1062-1.jpg"><img src="https://i.postimg.cc/sXpc77mK/thum-1600x1062-1.jpg" alt="Galeri 5"></button>
+    <button data-full="https://i.postimg.cc/2j7G5dVS/ok.jpg"><img src="https://i.postimg.cc/2j7G5dVS/ok.jpg" alt="Galeri 6"></button>
+    <button data-full="https://i.postimg.cc/MKYg8Xcf/large01.jpg"><img src="https://i.postimg.cc/MKYg8Xcf/large01.jpg" alt="Galeri 7"></button>
+    <button data-full="https://i.postimg.cc/HWqZJWt6/large07.jpg"><img src="https://i.postimg.cc/HWqZJWt6/large07.jpg" alt="Galeri 8"></button>
+    <button data-full="https://i.postimg.cc/YCwQNJ5f/474942861-122213474960316575-7493288508286834841-n.jpg"><img src="https://i.postimg.cc/YCwQNJ5f/474942861-122213474960316575-7493288508286834841-n.jpg" alt="Galeri 9"></button>
+  </div>
+</section>
+
+<!-- Lightbox (popup imej besar) -->
+<div class="lightbox" id="lightbox" hidden aria-modal="true" role="dialog">
+  <div class="lightbox-inner">
+    <img class="lightbox-img" id="lightboxImg" alt="Pratonton gambar">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Tutup">✕</button>
+  </div>
+</div>
+
+<!-- WHY -->
   <section class="why" aria-labelledby="kenapa">
     <h2 id="kenapa">Kenapa Pilih Ansuran LG?</h2>
     <div class="why-grid">
@@ -446,6 +487,29 @@
     var btn = document.getElementById('unmuteBtn');
     if(btn){ btn.addEventListener('click', function(){ if(window.heroPlayer && heroPlayer.unMute){ try{ heroPlayer.unMute(); heroPlayer.setVolume(100); heroPlayer.playVideo(); }catch(e){} } btn.classList.add('hidden'); }); }
   })();
-  </script>
+  
+/* ====== GALLERY LIGHTBOX ====== */
+(function(){
+  const box = document.getElementById('lightbox');
+  const img = document.getElementById('lightboxImg');
+  const closeBtn = document.getElementById('lightboxClose');
+  if(!box || !img || !closeBtn) return;
+
+  document.querySelectorAll('.gallery-grid button').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const src = btn.getAttribute('data-full') || btn.querySelector('img')?.src;
+      if(!src) return;
+      img.src = src;
+      box.hidden = false;
+    });
+  });
+
+  function close(){ box.hidden = true; img.removeAttribute('src'); }
+  closeBtn.addEventListener('click', close);
+  box.addEventListener('click', (e)=>{ if(e.target === box) close(); });
+  document.addEventListener('keydown', (e)=>{ if(!box.hidden && e.key === 'Escape'){ close(); }});
+})();
+
+</script>
 </body>
 </html>
