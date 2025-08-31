@@ -30,7 +30,7 @@
     .hero{background: radial-gradient(1200px 600px at 10% -10%, #212529 0%, #0b1220 55%, #0a0f1a 100%);color:#f8fafc;padding:56px 0 32px}
     .hero-wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center}
     .hero-copy{max-width:680px}
-    .promo-pill{display:inline-block;padding:8px 14px;border-radius:999px;background:#fee2e2;color:#7f1d1d;font-weight:800;box-shadow:0 6px 18px rgba(2,6,23,.08)}
+    .promo-pill{display:inline-block;padding:8px 14px;border-radius:999px;background:#fee2e2;color:#7f1d1d;font-weight:800;box-shadow:0 6px 18px rgba(2,6,23,.08); font-size: 0.9em; }
     
     /* ANIMASI HERO */
     @keyframes fadeInSlideUp {
@@ -70,13 +70,12 @@
         transform: translateY(0);
     }
 
-    /* Masalah Biasa */
-    .problems{padding:26px 0}
-    .problems h2{margin:0 0 16px;text-align:center}
-    .problems-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    .problem-card{background:#ffffff;border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;color:#0f172a}
-    .problem-card h4{margin:0 0 6px;font-size:1rem}
-    .problem-card p{margin:0;color:#475569;font-size:.92rem}
+    /* PAIN POINTS */
+    .alt{background:#e2e8f0;padding:40px 0}
+    .grid{display:grid;gap:16px}
+    .grid-4{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+    .card{background:#ffffff;border-radius:var(--radius);box-shadow:0 8px 20px rgba(0,0,0,.1);padding:20px;text-align:center;font-weight:600}
+    .card.border{border:1px solid #cbd5e1}
 
     /* WHY Section (dark card, centered) */
     .why{padding:40px 24px;margin:40px auto;border-radius:20px;background:var(--surface);color:#e5e7eb;box-shadow:0 12px 30px rgba(0,0,0,.18);max-width:1100px}
@@ -100,6 +99,13 @@
     .price{font-weight:800;color:#16a34a}
     .chev{transition:transform .2s ease}
     .acc-item.open .chev{transform:rotate(180deg)}
+    .promo-price {
+        color: var(--brand);
+        font-weight: 700;
+        text-decoration: line-through;
+        margin-left: 8px;
+        font-size: 0.9em;
+    }
 
     /* ANIMASI ACCORDION */
     .acc-body{
@@ -167,7 +173,7 @@
     /* GALLERY */
     .gallery{padding:26px 0}
     .gallery h2{margin:0 0 14px;text-align:center}
-    .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
     .gallery-grid button{padding:0;border:0;background:transparent;cursor:pointer;line-height:0;border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
     .gallery-grid img{width:100%;height:100%;aspect-ratio:1/1;object-fit:cover;display:block;transition:transform .3s cubic-bezier(0.25, 0.46, 0.45, 0.94)}
     .gallery-grid button:hover img{transform:scale(1.05)}
@@ -191,6 +197,13 @@
       .cta-inline{flex-direction:column; align-items:stretch}
       .btn.btn-xl{width:100%; justify-content:center}
       .hero-input{width:100%}
+    }
+
+    /* Gaya untuk seksyen Trust baharu */
+    .grid .card .icon {
+        font-size: 3rem;
+        line-height: 1;
+        margin-bottom: 0.5rem;
     }
   </style>
 </head>
@@ -220,12 +233,16 @@
     </div>
   </header>
 
-  <section class="problems container" aria-labelledby="masalah">
-    <h2 id="masalah">Anda ada masalah ni?</h2>
-    <div class="problems-grid">
-      <div class="problem-card reveal"><h4>💡 Bil elektrik melambung?</h4><p>LG Dual Inverter lebih efisien – suhu stabil, penggunaan kuasa lebih rendah.</p></div>
-      <div class="problem-card reveal"><h4>🔧 Risau kos servis & alat ganti?</h4><p>Servis berkala & waranti dibekalkan sepanjang kontrak ansuran.</p></div>
-      <div class="problem-card reveal"><h4>🛡️ Udara berhabuk & alergi?</h4><p>Plasmaster Ionizer++ & penapisan membantu udara kekal bersih.</p></div>
+  <!-- PAIN POINTS -->
+  <section class="alt" id="problems" aria-labelledby="problems-heading">
+    <div class="container">
+      <h2 id="problems-heading" class="reveal" style="text-align:center">🔥 Pernah Alami Masalah Ni?</h2>
+      <div class="grid grid-4">
+        <div class="card border reveal">❌ Bil elektrik melambung sebab pakai aircond lama</div>
+        <div class="card border reveal">❌ Aircond cepat rosak, asyik panggil orang repair</div>
+        <div class="card border reveal">❌ Rumah panas, tidur tak lena, fokus kerja terganggu</div>
+        <div class="card border reveal">❌ Nak pasang baru tapi risau kos mahal & tak telus</div>
+      </div>
     </div>
   </section>
 
@@ -240,7 +257,6 @@
     <button data-full="https://i.postimg.cc/2j7G5dVS/ok.jpg"><img src="https://i.postimg.cc/2j7G5dVS/ok.jpg" alt="Galeri 6"></button>
     <button data-full="https://i.postimg.cc/MKYg8Xcf/large01.jpg"><img src="https://i.postimg.cc/MKYg8Xcf/large01.jpg" alt="Galeri 7"></button>
     <button data-full="https://i.postimg.cc/HWqZJWt6/large07.jpg"><img src="https://i.postimg.cc/HWqZJWt6/large07.jpg" alt="Galeri 8"></button>
-    <button data-full="https://i.postimg.cc/YCwQNJ5f/474942861-122213474960316575-7493288508286834841-n.jpg"><img src="https://i.postimg.cc/YCwQNJ5f/474942861-122213474960316575-7493288508286834841-n.jpg" alt="Galeri 9"></button>
   </div>
 </section>
 
@@ -252,7 +268,7 @@
 </div>
 
 <section class="why" aria-labelledby="kenapa">
-    <h2 id="kenapa">Kenapa Pilih Ansuran LG?</h2>
+    <h2 id="kenapa" class="reveal">Kenapa Pilih Ansuran LG?</h2>
     <div class="why-grid">
       <article class="why-card reveal"><div class="v-ico">💳</div><h3>Serendah RM80/bulan (belum promosi)</h3><p>Miliki aircond premium tanpa membebankan.</p></article>
       <article class="why-card reveal"><div class="v-ico">🛠️</div><h3>Pemasangan Asas PERCUMA</h3><p>Jimat kos pemasangan sehingga RM250.</p></article>
@@ -265,7 +281,7 @@
 
   <main class="container">
     <section class="models" aria-labelledby="model">
-      <h2 id="model">Pilihan Model & Harga</h2>
+      <h2 id="model" class="reveal">Pilihan Model & Harga</h2>
       <div class="acc" id="modelsAcc"></div>
       <div class="mini-faq" id="modelsNotes">
         <strong>Termasuk:</strong> Pemasangan asas percuma, paip tembaga standard, bracket standard. <br/>
@@ -274,8 +290,36 @@
       </div>
     </section>
 
+    <!-- TRUST (moved here) -->
+    <section id="trust" class="alt" aria-labelledby="trust-heading">
+      <div class="container">
+        <h2 id="trust-heading" class="reveal" style="text-align:center">💎 Kenapa Ramai Pilih Dengan Syafiq LG?</h2>
+        <div class="grid grid-3">
+          <div class="card reveal"><div class="icon">🏅</div><p><strong>Ejen Sah LG HQ</strong><br/>Syafiq ejen berdaftar (<b>M236163</b>). Boleh semak dengan Hotline LG HQ.</p></div>
+          <div class="card reveal"><div class="icon">📜</div><p><strong>Jelas & Telus</strong><br/>Semua kos/terma diterangkan siap contoh bil & jadual bayaran. Tiada caj tersembunyi.</p></div>
+          <div class="card reveal"><div class="icon">🧑‍💼</div><p><strong>Syafiq Terangkan Satu‑Persatu</strong><br/>Dari pemilihan HP → proses mohon → pemasangan → servis. Whatsapp je, Syafiq guide.</p></div>
+        </div>
+        <p class="muted reveal" style="margin-top:12px;text-align:center">Boleh rujuk bukti di bawah — <strong>ramai pelanggan dah happy</strong> dengan servis Syafiq 😊</p>
+      </div>
+    </section>
+
+    <!-- TESTIMONIAL GALLERY (placeholder) -->
+    <section class="gallery container" aria-labelledby="testi-galeri-heading">
+        <h2 id="testi-galeri-heading" style="text-align: center;">Gambar Testimoni Pelanggan</h2>
+        <div class="gallery-grid">
+            <button data-full="https://placehold.co/400x400/999/fff?text=Testi+1"><img src="https://placehold.co/400x400/999/fff?text=Testi+1" alt="Testimoni Pelanggan 1"></button>
+            <button data-full="https://placehold.co/400x400/999/fff?text=Testi+2"><img src="https://placehold.co/400x400/999/fff?text=Testi+2" alt="Testimoni Pelanggan 2"></button>
+            <button data-full="https://placehold.co/400x400/999/fff?text=Testi+3"><img src="https://placehold.co/400x400/999/fff?text=Testi+3" alt="Testimoni Pelanggan 3"></button>
+            <button data-full="https://placehold.co/400x400/999/fff?text=Testi+4"><img src="https://placehold.co/400x400/999/fff?text=Testi+4" alt="Testimoni Pelanggan 4"></button>
+            <button data-full="https://placehold.co/400x400/999/fff?text=Testi+5"><img src="https://placehold.co/400x400/999/fff?text=Testi+5" alt="Testimoni Pelanggan 5"></button>
+            <button data-full="https://placehold.co/400x400/999/fff?text=Testi+6"><img src="https://placehold.co/400x400/999/fff?text=Testi+6" alt="Testimoni Pelanggan 6"></button>
+            <button data-full="https://placehold.co/400x400/999/fff?text=Testi+7"><img src="https://placehold.co/400x400/999/fff?text=Testi+7" alt="Testimoni Pelanggan 7"></button>
+            <button data-full="https://placehold.co/400x400/999/fff?text=Testi+8"><img src="https://placehold.co/400x400/999/fff?text=Testi+8" alt="Testimoni Pelanggan 8"></button>
+        </div>
+    </section>
+
     <section class="process" aria-labelledby="proses">
-      <h2 id="proses">Cara Mohon (4 Langkah)</h2>
+      <h2 id="proses" class="reveal">Cara Mohon (4 Langkah)</h2>
       <div class="steps">
         <div class="step reveal"><h4>1. Pilih Model</h4><p>Pilih HP & ciri mengikut saiz ruang.</p></div>
         <div class="step reveal"><h4>2. Bagi Detail </h4><p>Nama, IC, Alamat Pemasangan, Emel – semudah ABC.</p></div>
@@ -285,21 +329,21 @@
     </section>
 
     <section class="testi" aria-labelledby="testi">
-      <h2 id="testi">Testimoni Pelanggan</h2>
+      <h2 id="testi" class="reveal">Testimoni Pelanggan</h2>
       <div class="testi-row" id="testiRow"></div>
     </section>
 
     <section class="faq" aria-labelledby="faq">
-      <h2 id="faq">Soalan Lazim</h2>
-      <details><summary>Dokumen apa diperlukan?</summary><p>Salinan IC (depan & belakang) & Kad Bank (Depan), Penyata Bank 3 bulan.</p></details>
-      <details><summary>Dokumen perlu bagi siapa? </summary><p>Semua dokumen perlu masukkan dalam Sistem LG sahaja.</p></details>
-        <details><summary>Berapa lama proses kelulusan?</summary><p>Dalam 2 hari bekerja.</p></details>
-          <details><summary>Ada Deposit ke?</summary><p> 0 Deposit. Pendafataran RM10 diperlukan untuk pengesahan Bank, dikembalikan dalam 14 hari bekerja.</p></details>
-      <details><summary>Ada kos pemasangan tambahan?</summary><p>Pemasangan asas Percuma adalah termasuk; 10 kali Copper & wire, 15 kaki drain Pipe, Braket untuk Compressor. Perlukan lebih baru ada caj.</p></details>
-      <details><summary>Bil elektrik naik tak?</summary><p>Model DUAL Inverter + 5★ Energy membantu lebih jimat berbanding biasa, bergantung pola penggunaan.</p></details>
+      <h2 id="faq" class="reveal">Soalan Lazim</h2>
+      <details class="reveal"><summary>Dokumen apa diperlukan?</summary><p>Salinan IC (depan & belakang) & Kad Bank (Depan), Penyata Bank 3 bulan.</p></details>
+      <details class="reveal"><summary>Dokumen perlu bagi siapa? </summary><p>Semua dokumen perlu masukkan dalam Sistem LG sahaja.</p></details>
+        <details class="reveal"><summary>Berapa lama proses kelulusan?</summary><p>Dalam 2 hari bekerja.</p></details>
+          <details class="reveal"><summary>Ada Deposit ke?</summary><p> 0 Deposit. Pendafataran RM10 diperlukan untuk pengesahan Bank, dikembalikan dalam 14 hari bekerja.</p></details>
+      <details class="reveal"><summary>Ada kos pemasangan tambahan?</summary><p>Pemasangan asas Percuma adalah termasuk; 10 kali Copper & wire, 15 kaki drain Pipe, Braket untuk Compressor. Perlukan lebih baru ada caj.</p></details>
+      <details class="reveal"><summary>Bil elektrik naik tak?</summary><p>Model DUAL Inverter + 5★ Energy membantu lebih jimat berbanding biasa, bergantung pola penggunaan.</p></details>
     </section>
 
-    <section class="cta-end">
+    <section class="cta-end reveal">
       <div>
         <h3 style="margin:0">NAK SEJUKKAN bilik dari RM80 sebulan? Biar Syafiq bantu sampai LULUS – Stok Terhad</h3>
         <p style="margin:.2rem 0;color:#475569">Whatsapp Syafiq untuk langkah seterusnya.</p>
@@ -367,8 +411,8 @@
 
     MODEL_GROUPS.forEach((m, idx)=>{
       const item = document.createElement('div');
-      item.className = 'acc-item reveal'; /* Tambah reveal class */
-      item.style.transitionDelay = `${idx * 0.1}s`; /* Animasi berperingkat */
+      item.className = 'acc-item reveal';
+      item.style.transitionDelay = `${idx * 0.1}s`;
       item.innerHTML = `
         <div class="acc-head" role="button" aria-expanded="false" tabindex="0">
           <div class="label">
@@ -376,7 +420,7 @@
             <span class="chip">${m.colorName}</span>
             <div>
               <div style="font-weight:800">Aircond LG – ${m.colorName}</div>
-              <div class="price">dari RM${m.startFrom}/bulan</div>
+              <div class="price">dari RM${m.startFrom/2}/bulan <span class="promo-price">RM${m.startFrom}/bulan</span></div>
             </div>
           </div>
           <svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#0f172a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
