@@ -576,7 +576,6 @@
   (function(){
     const heroVideo = document.getElementById('heroVideo');
     const videoControlBtn = document.getElementById('videoControlBtn');
-    let playCount = 0; // Initialize a counter for the number of video plays.
     
     // Set video properties and check for autoplay
     if (heroVideo) {
@@ -590,13 +589,9 @@
 
       // Event listener to handle the video loop
       heroVideo.addEventListener('ended', function() {
-        // Check if the video has played less than 2 times
-        if (playCount < 1) {
-          // Reset the video to the beginning and play again
-          heroVideo.currentTime = 0;
-          heroVideo.play();
-          playCount++;
-        }
+        // After video ends, make the button visible and set it to 'Play Again'
+        videoControlBtn.textContent = '▶️ Play Again';
+        videoControlBtn.classList.remove('hidden');
       });
     }
 
@@ -609,7 +604,7 @@
           heroVideo.play();
           videoControlBtn.textContent = '⏸️ Pause';
         } else if (heroVideo.paused) {
-          // If paused, play
+          // If paused, play from the current position (or from the beginning if it was ended)
           heroVideo.play();
           videoControlBtn.textContent = '⏸️ Pause';
         } else {
