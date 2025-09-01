@@ -143,6 +143,7 @@
     .hp-btn:hover{background: #f1f5f9}
     .hp-btn[aria-pressed="true"]{outline:3px solid var(--ring);border-color:#93c5fd; background:#e0f2fe}
     .cta-wrap{display:none;gap:10px;flex-wrap:wrap}
+    .price-display{font-size:1.1rem;font-weight:700;margin-top:12px;padding:12px 14px;background:#e0f2fe;color:var(--surface);border-radius:12px;text-align:center;display:none}
 
     /* PROCESS */
     .process{padding:10px 0 0}
@@ -382,7 +383,7 @@
       ]
     },
     {
-      colorName: 'Hitam (ArtCool)', colorKey: 'hitam', startFrom: 100,
+      colorName: 'Hitam (ArtCool)', colorKey: 'hitam', startFrom: 90,
       thumb: 'https://i.postimg.cc/Y0Mx30y7/thum-1600x1062.jpg',
       slides: [
         {type:'img', src:'https://i.postimg.cc/Y0Mx30y7/thum-1600x1062.jpg'},
@@ -390,8 +391,8 @@
         {type:'img', src:'https://i.postimg.cc/2j7G5dVS/ok.jpg'}
       ],
       hpOptions: [
-        {label:'1.5HP', code:'1.5HP', monthly:100},
-        {label:'2.5HP', code:'2.5HP', monthly:130}
+        {label:'1.5HP', code:'1.5HP', monthly:90},
+        {label:'2.5HP', code:'2.5HP', monthly:120}
       ]
     }
   ];
@@ -442,6 +443,7 @@
             <div style="margin-top:8px"><button class="btn" style="background:#111827;color:#fff" data-action="show-detail">Lihat Detail</button></div>
 
             <div class="hp-picker" role="group" aria-label="Pilih HP"></div>
+            <div class="price-display"></div>
             <div class="cta-wrap"></div>
           </div>
         </div>
@@ -454,6 +456,7 @@
       const dots = $('.dots', item);
       const hpPicker = $('.hp-picker', item);
       const ctaWrap = $('.cta-wrap', item);
+      const priceDisplay = $('.price-display', item);
       const showBtn = $('[data-action="show-detail"]', item);
       let slidesLoaded = false;
       let selectedHP = null;
@@ -491,9 +494,17 @@
               $$('.hp-btn', hpPicker).forEach(b=>b.setAttribute('aria-pressed','false'));
               btn.setAttribute('aria-pressed','true');
               selectedHP = btn.dataset.hp;
+              const selectedMonthly = btn.dataset.monthly;
+
+              // Update and show price display
+              if(priceDisplay){
+                  priceDisplay.innerHTML = `Harga Ansuran: <strong>RM${selectedMonthly}/bulan</strong><br><small>(Promo 50% untuk 9 bulan: RM${selectedMonthly/2}/bulan)</small>`;
+                  priceDisplay.style.display = 'block';
+              }
+              
               ctaWrap.style.display = 'flex';
               ctaWrap.innerHTML = `
-                <a class=\"btn\" href=\"https://wa.me/601120592207?text=${encodeURIComponent('Hi Syafiq, Saya nak mohon Aircond LG ' + m.colorName + ' – ' + selectedHP)}\" target=\"_blank\" rel=\"noopener\">Mohon Model Ini</a>
+                <a class=\"btn\" href=\"https://wa.me/601120592207?text=${encodeURIComponent('Hi Syafiq, Saya nak mohon Aircond LG ' + m.colorName + ' – ' + selectedHP + ' @ RM' + selectedMonthly + '/bulan')}\" target=\"_blank\" rel=\"noopener\">Mohon Model Ini</a>
                 <a class=\"btn\" style=\"background:linear-gradient(90deg,var(--brand-2),var(--brand))\" href=\"#faq\">Ada soalan?</a>
               `;
             });
@@ -501,6 +512,7 @@
         }
         hpPicker.style.display = 'flex';
         ctaWrap.style.display = selectedHP ? 'flex' : 'none';
+        priceDisplay.style.display = selectedHP ? 'block' : 'none';
       });
     });
   }
