@@ -227,8 +227,8 @@
         </div>
       </div>
       <div class="hero-visual" aria-hidden="true">
-        <!-- Replaced YouTube iframe with a standard HTML5 video tag -->
-        <video id="heroVideo" src="https://raw.githubusercontent.com/Syafixit/ansuranlg/main/video%20pengenalan.mp4" autoplay loop muted playsinline></video>
+        <!-- Removed loop attribute, now using JavaScript to control the loop count -->
+        <video id="heroVideo" src="https://raw.githubusercontent.com/Syafixit/ansuranlg/main/video%20pengenalan.mp4" autoplay muted playsinline></video>
         <!-- Updated button for play/pause and unmute functionality -->
         <button class="unmute-btn" id="videoControlBtn" aria-label="Hidupkan bunyi">🔊 Hidupkan bunyi</button>
       </div>
@@ -576,6 +576,7 @@
   (function(){
     const heroVideo = document.getElementById('heroVideo');
     const videoControlBtn = document.getElementById('videoControlBtn');
+    let playCount = 0; // Initialize a counter for the number of video plays.
     
     // Set video properties and check for autoplay
     if (heroVideo) {
@@ -584,6 +585,17 @@
         console.error("Autoplay failed:", error);
         if (videoControlBtn) {
           videoControlBtn.classList.remove('hidden');
+        }
+      });
+
+      // Event listener to handle the video loop
+      heroVideo.addEventListener('ended', function() {
+        // Check if the video has played less than 2 times
+        if (playCount < 1) {
+          // Reset the video to the beginning and play again
+          heroVideo.currentTime = 0;
+          heroVideo.play();
+          playCount++;
         }
       });
     }
