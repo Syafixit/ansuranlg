@@ -52,7 +52,7 @@
     .trust-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
     .trust-badge{display:inline-flex;align-items:center;gap:.5rem;padding:10px 14px;border-radius:999px;background:rgba(15,23,42,.6);color:#e5e7eb;font-weight:700;backdrop-filter: blur(6px);box-shadow: inset 0 0 0 1px rgba(148,163,184,.25)}
     .hero-visual{background:#000;border-radius:var(--radius);box-shadow:var(--shadow);aspect-ratio:16/9;position:relative;overflow:hidden}
-    .hero-visual iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:1}
+    .hero-visual video{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:1;object-fit: cover;}
     .unmute-btn{position:absolute;left:12px;bottom:12px;z-index:2;display:inline-flex;align-items:center;gap:.5rem;padding:10px 14px;border-radius:999px;border:0;cursor:pointer;background:rgba(15,23,42,.85);color:#fff;backdrop-filter:blur(6px);font-weight:700}
     .unmute-btn.hidden{display:none}
 
@@ -227,7 +227,8 @@
         </div>
       </div>
       <div class="hero-visual" aria-hidden="true">
-        <iframe id="heroVideo" src="https://www.youtube.com/embed/-SBVZapZ4-E?autoplay=1&mute=1&playsinline=1&controls=0&rel=0&modestbranding=1&loop=1&playlist=-SBVZapZ4-E&enablejsapi=1" title="Aircond LG Video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+        <!-- Replaced YouTube iframe with a standard HTML5 video tag -->
+        <video id="heroVideo" src="https://raw.githubusercontent.com/Syafixit/ansuranlg/main/video%20pengenalan.mp4" autoplay loop muted playsinline></video>
         <button class="unmute-btn" id="unmuteBtn" aria-label="Hidupkan bunyi">🔊 Hidupkan bunyi</button>
       </div>
     </div>
@@ -570,17 +571,32 @@
   renderTestimonials();
   bindStickyCTA();
 
-  /* ====== YOUTUBE HERO (unmute support) ====== */
+  /* ====== HERO VIDEO (unmute support for HTML5 video) ====== */
   (function(){
-    var tag=document.createElement('script'); tag.src='https://www.youtube.com/iframe_api';
-    var firstScriptTag=document.getElementsByTagName('script')[0]; firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-    window.heroPlayer = null;
-    window.onYouTubeIframeAPIReady = function(){
-      var el = document.getElementById('heroVideo'); if(!el) return;
-      window.heroPlayer = new YT.Player('heroVideo',{ events:{ onReady: function(){ try{ heroPlayer.mute(); heroPlayer.playVideo(); }catch(e){} } } });
-    };
-    var btn = document.getElementById('unmuteBtn');
-    if(btn){ btn.addEventListener('click', function(){ if(window.heroPlayer && heroPlayer.unMute){ try{ heroPlayer.unMute(); heroPlayer.setVolume(100); heroPlayer.playVideo(); }catch(e){} } btn.classList.add('hidden'); }); }
+    const heroVideo = document.getElementById('heroVideo');
+    const unmuteBtn = document.getElementById('unmuteBtn');
+    
+    // Set video properties and check for autoplay
+    if (heroVideo) {
+      heroVideo.play().catch(error => {
+        // If autoplay fails, show the unmute button and log the error.
+        console.error("Autoplay failed:", error);
+        if (unmuteBtn) {
+          unmuteBtn.classList.remove('hidden');
+        }
+      });
+    }
+
+    // Unmute button functionality
+    if (unmuteBtn) {
+      unmuteBtn.addEventListener('click', function() {
+        if (heroVideo) {
+          heroVideo.muted = false;
+          heroVideo.play();
+          unmuteBtn.classList.add('hidden');
+        }
+      });
+    }
   })();
   
 /* ====== GALLERY LIGHTBOX ====== */
