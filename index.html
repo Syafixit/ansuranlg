@@ -229,7 +229,8 @@
       <div class="hero-visual" aria-hidden="true">
         <!-- Replaced YouTube iframe with a standard HTML5 video tag -->
         <video id="heroVideo" src="https://raw.githubusercontent.com/Syafixit/ansuranlg/main/video%20pengenalan.mp4" autoplay loop muted playsinline></video>
-        <button class="unmute-btn" id="unmuteBtn" aria-label="Hidupkan bunyi">🔊 Hidupkan bunyi</button>
+        <!-- Updated button for play/pause and unmute functionality -->
+        <button class="unmute-btn" id="videoControlBtn" aria-label="Hidupkan bunyi">🔊 Hidupkan bunyi</button>
       </div>
     </div>
   </header>
@@ -571,29 +572,38 @@
   renderTestimonials();
   bindStickyCTA();
 
-  /* ====== HERO VIDEO (unmute support for HTML5 video) ====== */
+  /* ====== HERO VIDEO (unmute and play/pause support for HTML5 video) ====== */
   (function(){
     const heroVideo = document.getElementById('heroVideo');
-    const unmuteBtn = document.getElementById('unmuteBtn');
+    const videoControlBtn = document.getElementById('videoControlBtn');
     
     // Set video properties and check for autoplay
     if (heroVideo) {
       heroVideo.play().catch(error => {
-        // If autoplay fails, show the unmute button and log the error.
+        // If autoplay fails, show the video control button.
         console.error("Autoplay failed:", error);
-        if (unmuteBtn) {
-          unmuteBtn.classList.remove('hidden');
+        if (videoControlBtn) {
+          videoControlBtn.classList.remove('hidden');
         }
       });
     }
 
-    // Unmute button functionality
-    if (unmuteBtn) {
-      unmuteBtn.addEventListener('click', function() {
-        if (heroVideo) {
+    // Video control button functionality
+    if (videoControlBtn) {
+      videoControlBtn.addEventListener('click', function() {
+        if (heroVideo.muted) {
+          // If muted, unmute and play
           heroVideo.muted = false;
           heroVideo.play();
-          unmuteBtn.classList.add('hidden');
+          videoControlBtn.textContent = '⏸️ Pause';
+        } else if (heroVideo.paused) {
+          // If paused, play
+          heroVideo.play();
+          videoControlBtn.textContent = '⏸️ Pause';
+        } else {
+          // If playing, pause
+          heroVideo.pause();
+          videoControlBtn.textContent = '▶️ Main';
         }
       });
     }
