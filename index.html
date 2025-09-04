@@ -55,9 +55,9 @@
     .hero-features{display:flex;gap:14px;flex-wrap:wrap;list-style:none;margin:10px 0 18px;padding:0;font-weight:600}
     
     .hero-features li {
-        padding: 4px 12px;
+        padding: 6px 16px;
         border-radius: 999px;
-        font-size: 0.9em;
+        font-size: 1em;
         font-weight: 700;
     }
     .hero-features li:nth-child(1) { background: #fee2e2; color: #991b1b; }
@@ -111,7 +111,14 @@
     .price{font-weight:800;color:#16a34a}
     .chev{transition:transform .2s ease}
     .acc-item.open .chev{transform:rotate(180deg)}
-    .promo-price { color: var(--brand); font-weight: 700; text-decoration: line-through; margin-left: 8px; font-size: 0.9em; }
+    /* === WARNA HARGA ASAL DIUBAH KEPADA MERAH === */
+    .promo-price {
+        color: #dc2626; /* Warna diubah dari biru (var(--brand)) kepada merah */
+        font-weight: 700;
+        text-decoration: line-through;
+        margin-left: 8px;
+        font-size: 0.9em;
+    }
 
     .acc-body{
       display:grid;
@@ -196,7 +203,11 @@
     .grid .card .icon { font-size: 3rem; line-height: 1; margin-bottom: 0.5rem; }
     
     /* KAD BERWARNA-WARNI UNTUK SEKSYEN TERTENTU */
-    #problems .card { border: none; }
+    #problems .card {
+        border: none;
+        font-size: 1.2em;
+        line-height: 1.5;
+    }
     #problems .card:nth-child(1) { background-color: #fee2e2; color: #991b1b; }
     #problems .card:nth-child(2) { background-color: #fef9c3; color: #854d0e; }
     #problems .card:nth-child(3) { background-color: #ede9fe; color: #5b21b6; }
@@ -218,18 +229,16 @@
     .faq details:nth-child(odd) { background-color: #ffffff; }
     .faq details:nth-child(even) { background-color: #f0f9ff; }
     
-    /* === BARU: Latar Belakang Merah untuk Seksyen Galeri === */
     section.gallery[aria-labelledby="galeri"] {
-        background-color: #be123c; /* Warna Merah Gelap */
+        background-color: #be123c;
         border-radius: var(--radius);
         padding: 40px 24px;
         box-shadow: var(--shadow);
         margin-block: 40px; 
     }
     section.gallery[aria-labelledby="galeri"] h2#galeri {
-        color: #ffffff; /* Tukar warna teks tajuk jadi putih */
+        color: #ffffff;
     }
-    /* === TAMAT BAHAGIAN BARU === */
 
   </style>
 </head>
@@ -307,16 +316,7 @@
   </section>
 
   <main class="container">
-    <section class="models" aria-labelledby="model">
-      <h2 id="model" class="reveal">Pilihan Model & Harga</h2>
-      <div class="acc" id="modelsAcc"></div>
-      <div class="mini-faq" id="modelsNotes">
-        <strong>Termasuk:</strong> Warranty, Penghantaran & Pemasangan Asas Percuma, Servis Berkala <br/>
-        <strong>Nota Ansuran:</strong> Harga bulanan tertakluk pada kapasiti HP yang dipilih & semakan kelayakan. <br/>
-        <strong>Tip saiz:</strong> 1.0HP (≤120 sq ft), 1.5HP (≤180 sq ft), 2.0HP (≤240 sq ft), 2.5HP (≤300 sq ft).
-      </div>
-    </section>
-
+    
     <section id="trust" class="alt" aria-labelledby="trust-heading">
       <div class="container">
         <h2 id="trust-heading" class="reveal" style="text-align:center">💎 Kenapa Ramai Pilih Dengan Syafiq LG?</h2>
@@ -348,6 +348,16 @@
         <div class="step reveal"><h4>2. Whatsapp Syafiq </h4><p>Nama, IC, Alamat Pemasangan, Emel.</p></div>
         <div class="step reveal"><h4>3. Upload Dokumen di Sistem LG</h4><p>Kelulusan dalam 2 hari, tiada deposit.</p></div>
         <div class="step reveal"><h4>4. Pasang & Guna</h4><p>Temujanji pemasangan, terus nikmati Aircond LG.</p></div>
+      </div>
+    </section>
+    
+    <section class="models" aria-labelledby="model">
+      <h2 id="model" class="reveal">Pilihan Model & Harga</h2>
+      <div class="acc" id="modelsAcc"></div>
+      <div class="mini-faq" id="modelsNotes">
+        <strong>Termasuk:</strong> Warranty, Penghantaran & Pemasangan Asas Percuma, Servis Berkala <br/>
+        <strong>Nota Ansuran:</strong> Harga bulanan tertakluk pada kapasiti HP yang dipilih & semakan kelayakan. <br/>
+        <strong>Tip saiz:</strong> 1.0HP (≤120 sq ft), 1.5HP (≤180 sq ft), 2.0HP (≤240 sq ft), 2.5HP (≤300 sq ft).
       </div>
     </section>
 
