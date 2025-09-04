@@ -55,9 +55,9 @@
     .hero-features{display:flex;gap:14px;flex-wrap:wrap;list-style:none;margin:10px 0 18px;padding:0;font-weight:600}
     
     .hero-features li {
-        padding: 6px 16px;
+        padding: 4px 12px;
         border-radius: 999px;
-        font-size: 1em;
+        font-size: 0.9em;
         font-weight: 700;
     }
     .hero-features li:nth-child(1) { background: #fee2e2; color: #991b1b; }
@@ -111,9 +111,8 @@
     .price{font-weight:800;color:#16a34a}
     .chev{transition:transform .2s ease}
     .acc-item.open .chev{transform:rotate(180deg)}
-    /* === WARNA HARGA ASAL DIUBAH KEPADA MERAH === */
     .promo-price {
-        color: #dc2626; /* Warna diubah dari biru (var(--brand)) kepada merah */
+        color: #dc2626;
         font-weight: 700;
         text-decoration: line-through;
         margin-left: 8px;
@@ -130,7 +129,10 @@
       overflow: hidden;
       transition: max-height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
-    .acc-item.open .acc-body{ max-height: 600px; padding: 16px; }
+    .acc-item.open .acc-body{
+      max-height: 750px;
+      padding: 16px;
+    }
     .spec{display:grid;gap:10px}
 
     .slider{position:relative;border-radius:12px;overflow:hidden;background:#0f172a}
@@ -185,9 +187,9 @@
     .lightbox-inner{max-width:min(1000px,92vw);max-height:88vh;position:relative}
     .lightbox-img{max-width:100%;max-height:88vh;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
     .lightbox-close{position:absolute;top:-12px;right:-12px;background:#fff;border:0;border-radius:999px;width:40px;height:40px;display:grid;place-items:center;cursor:pointer;box-shadow:var(--shadow);font-weight:900}
-    @media (max-width:900px){.gallery-grid{grid-template-columns:repeat(2,1fr)}}
-
-    @media (max-width: 900px){
+    
+    @media (max-width:900px){
+      .gallery-grid{grid-template-columns:1fr}
       .hero{padding:38px 0 18px}
       .hero-wrap{grid-template-columns:1fr}
       .problems-grid{grid-template-columns:1fr}
@@ -222,7 +224,12 @@
     .steps .step:nth-child(2) { background-color: #dcfce7; }
     .steps .step:nth-child(3) { background-color: #dbeafe; }
     .steps .step:nth-child(4) { background-color: #fee2e2; }
-    .steps .step h4 { color: #1e293b; }
+    
+    /* === SAIZ FON DI SINI DIKEMASKINI === */
+    .steps .step h4 {
+        color: #1e293b;
+        font-size: 1.2em; /* Saiz fon dibesarkan */
+    }
     .steps .step p { color: #475569; }
 
     .faq details { border: 1px solid #dbeafe; }
